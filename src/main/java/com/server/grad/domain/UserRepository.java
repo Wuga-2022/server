@@ -1,2 +1,6 @@
-package com.server.grad.domain;public interface UserRepository {
+package com.server.grad.domain;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UserRepository extends JpaRepository<User, Long> {
 }

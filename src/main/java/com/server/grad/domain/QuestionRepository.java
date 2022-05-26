@@ -1,2 +1,6 @@
-package com.server.grad.domain;public interface QuestionRepository {
+package com.server.grad.domain;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface QuestionRepository extends JpaRepository<Question, Long> {
 }
