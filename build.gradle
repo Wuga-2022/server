@@ -30,5 +30,6 @@ dependencies {
 //    compile('mysql:mysql-connector-java')
     compile('org.postgresql:postgresql')
     compile('org.projectlombok:lombok')
+    annotationProcessor('org.projectlombok:lombok')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
