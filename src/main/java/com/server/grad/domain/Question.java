@@ -20,7 +20,7 @@ public class Question {
     @Column(nullable = false)
     private String question;
 
-    @Column(nullable = false)
+    @Column
     private LocalDate date;
 
     @Column
