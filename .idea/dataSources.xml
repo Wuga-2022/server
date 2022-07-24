@@ -8,7 +8,11 @@
       <jdbc-url>jdbc:mysql://localhost:3306</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+<<<<<<< HEAD
     <data-source source="LOCAL" name="postgres@heroku" uuid="5e6254f9-68b1-43ed-91b0-9701c1dfaeeb">
+=======
+    <data-source source="LOCAL" name="postgres@heroku" uuid="367a2ded-4168-4243-bf79-e85f79db56bf">
+>>>>>>> main
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
