@@ -23,12 +23,6 @@ public class UserApiController {
         return userService.update(id, requestDto);
     }
 
-    @DeleteMapping("/user/{id}")
-    public Long delete(@PathVariable Long id) {
-        userService.delete(id);
-        return id;
-    }
-
     @GetMapping("/user/{id}")
     public UserResponseDto findById(@PathVariable Long id) {
         return userService.findById(id);

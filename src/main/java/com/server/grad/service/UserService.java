@@ -31,14 +31,6 @@ public class UserService {
         return id;
    }
 
-   @Transactional
-    public void delete(Long id){
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 유저 정보 없음 = " + id));
-
-        userRepository.delete(user);
-   }
-
     public UserResponseDto findById(Long id){
         User entity = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 유저 정보 없음 = " + id));
