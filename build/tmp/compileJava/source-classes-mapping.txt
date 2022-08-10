@@ -2,8 +2,8 @@ com/server/grad/domain/CommentsRepository.java
  com.server.grad.domain.CommentsRepository
 com/server/grad/domain/QuestionRepository.java
  com.server.grad.domain.QuestionRepository
-com/server/grad/web/MissionApiController.java
- com.server.grad.web.MissionApiController
+com/server/grad/web/dto/QuestionResponseDto.java
+ com.server.grad.web.dto.QuestionResponseDto
 com/server/grad/service/CommentsService.java
  com.server.grad.service.CommentsService
 com/server/grad/domain/Family.java
@@ -29,8 +29,8 @@ com/server/grad/Application.java
  com.server.grad.Application
 com/server/grad/service/FamilyService.java
  com.server.grad.service.FamilyService
-com/server/grad/service/MissionService.java
- com.server.grad.service.MissionService
+com/server/grad/web/QuestionApiController.java
+ com.server.grad.web.QuestionApiController
 com/server/grad/web/CommentsApiController.java
  com.server.grad.web.CommentsApiController
 com/server/grad/domain/Answers.java
@@ -50,7 +50,9 @@ com/server/grad/service/QuestionService.java
 com/server/grad/domain/Question.java
  com.server.grad.domain.Question
  com.server.grad.domain.Question$QuestionBuilder
-com/server/grad/web/dto/QuestionResponseDto.java
- com.server.grad.web.dto.QuestionResponseDto
-com/server/grad/web/QuestionApiController.java
- com.server.grad.web.QuestionApiController
+com/server/grad/web/dto/MissionResponseDto.java
+ com.server.grad.web.dto.MissionResponseDto
+com/server/grad/service/MissionService.java
+ com.server.grad.service.MissionService
+com/server/grad/web/MissionApiController.java
+ com.server.grad.web.MissionApiController
