@@ -1,15 +1,15 @@
 package com.server.grad.domain;
 
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Getter
+@Data
 @NoArgsConstructor
 @Entity
-@Table(name ="tb_user")
+@Table(name = "user", schema = "public")
 public class User {
 
     @Id
@@ -33,6 +33,13 @@ public class User {
 
     @Builder
     public User(String name, String email, String role, Long family_code){
+        this.name = name;
+        this.email = email;
+        this.role = role;
+        this.family_code = family_code;
+    }
+
+    public void update(String name, String email, String role, Long family_code){
         this.name = name;
         this.email = email;
         this.role = role;
