@@ -1,4 +1,4 @@
-package com.server.grad.web.dto;
+package com.server.grad.dto;
 
 import com.server.grad.domain.Mission;
 import lombok.Getter;

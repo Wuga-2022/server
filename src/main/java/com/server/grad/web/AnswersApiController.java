@@ -1,14 +1,8 @@
 package com.server.grad.web;
 
-import com.server.grad.service.AnswersService;
-import com.server.grad.web.dto.answers.AnswersResponseDto;
-import com.server.grad.web.dto.answers.AnswersSaveRequestDto;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @Api(value="Answers Controller", tags = "")

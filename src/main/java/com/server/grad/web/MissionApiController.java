@@ -1,9 +1,8 @@
 package com.server.grad.web;
 
 import com.server.grad.service.MissionService;
-import com.server.grad.web.dto.MissionResponseDto;
+import com.server.grad.dto.MissionResponseDto;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

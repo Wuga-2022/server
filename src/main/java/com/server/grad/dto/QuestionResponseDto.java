@@ -1,13 +1,9 @@
-package com.server.grad.web.dto;
+package com.server.grad.dto;
 
-import com.server.grad.domain.Answers;
 import com.server.grad.domain.Question;
-import com.server.grad.web.dto.answers.AnswersResponseDto;
 import lombok.Getter;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 public class QuestionResponseDto {

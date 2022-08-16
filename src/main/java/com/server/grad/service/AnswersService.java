@@ -1,13 +1,7 @@
 package com.server.grad.service;
 
-import com.server.grad.domain.AnswersRepository;
-import com.server.grad.domain.Question;
-import com.server.grad.domain.QuestionRepository;
-import com.server.grad.web.dto.answers.AnswersResponseDto;
-import com.server.grad.web.dto.answers.AnswersSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor

@@ -2,9 +2,9 @@ package com.server.grad.service;
 
 import com.server.grad.domain.User;
 import com.server.grad.domain.UserRepository;
-import com.server.grad.dto.UserResponseDto;
-import com.server.grad.dto.UserSaveRequestDto;
-import com.server.grad.dto.UserUpdateRequestDto;
+import com.server.grad.dto.user.UserResponseDto;
+import com.server.grad.dto.user.UserSaveRequestDto;
+import com.server.grad.dto.user.UserUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
