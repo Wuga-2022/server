@@ -2,7 +2,7 @@ package com.server.grad.service;
 
 import com.server.grad.domain.Mission;
 import com.server.grad.domain.MissionRepository;
-import com.server.grad.web.dto.MissionResponseDto;
+import com.server.grad.dto.MissionResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

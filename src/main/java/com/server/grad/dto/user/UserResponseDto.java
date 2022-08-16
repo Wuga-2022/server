@@ -1,4 +1,4 @@
-package com.server.grad.dto;
+package com.server.grad.dto.user;
 
 import com.server.grad.domain.User;
 import lombok.Getter;
