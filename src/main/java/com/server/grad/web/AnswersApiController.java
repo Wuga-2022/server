@@ -4,6 +4,7 @@ import com.server.grad.dto.answers.AnswersResponseDto;
 import com.server.grad.dto.answers.AnswersSaveRequestDto;
 import com.server.grad.service.AnswersService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ public class AnswersApiController {
     private final AnswersService answersService;
 
     @PostMapping("/question/answers/{id}")
+    @ApiOperation(value = "답변 등록", notes = "질문 id에 따른 답변 등록")
     public AnswersResponseDto saveAnswer(@PathVariable Long id, @RequestBody AnswersSaveRequestDto requestDto){
         AnswersResponseDto result = answersService.save(id, requestDto);
         return result;

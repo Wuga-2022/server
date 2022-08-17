@@ -22,12 +22,13 @@ public class QuestionApiController {
     private final QuestionService questionService;
 
     @GetMapping("/question/{id}")
-    @ApiOperation(value = "질문 반환")
+    @ApiOperation(value = "질문 반환", notes = "질문 id에 맞게 반환")
     public QuestionResponseDto findById(@PathVariable Long id){
         return questionService.findById(id);
     }
 
     @GetMapping("/question/answers/{id}")
+    @ApiOperation(value = "모든 답변 반환", notes = "질문 id에 맞는 모든 답변 반환")
     public List<AnswersResponseDto> read(@PathVariable Long id){
         QuestionResponseDto dto = questionService.findById(id);
         return dto.getAnswers();
