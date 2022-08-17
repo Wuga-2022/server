@@ -1,5 +1,6 @@
 package com.server.grad.web;
 
+import com.server.grad.dto.answers.AnswersResponseDto;
 import com.server.grad.service.QuestionService;
 import com.server.grad.dto.QuestionResponseDto;
 import io.swagger.annotations.Api;
@@ -9,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @Api(value="Question Controller", tags = "")
 @RestController
@@ -24,9 +27,9 @@ public class QuestionApiController {
         return questionService.findById(id);
     }
 
-//    @GetMapping("/question/answer/{id}")
-//    public List<AnswersResponseDto> read(@PathVariable Long id){
-//        QuestionResponseDto dto = questionService.findById(id);
-//        return dto.getAnswers();
-//    }
+    @GetMapping("/question/answers/{id}")
+    public List<AnswersResponseDto> read(@PathVariable Long id){
+        QuestionResponseDto dto = questionService.findById(id);
+        return dto.getAnswers();
+    }
 }
