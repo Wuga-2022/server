@@ -25,4 +25,8 @@ public class Family {
     public Family(int points){
         this.points = points;
     }
+
+    public void update(int points){
+        this.points = points;
+    }
 }
