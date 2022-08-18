@@ -1,8 +1,12 @@
 package com.server.grad.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.mapping.Join;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -16,7 +20,6 @@ public class Answers {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // 타입 어떻게 하지??
     @Column
     private int emoji;
 
@@ -26,12 +29,22 @@ public class Answers {
     @Column
     private LocalDate date;
 
-    // question 테이블 조인 필요
+    // question join
+    @ManyToOne
+    @JoinColumn(name = "question_id")
+    private Question question_id;
+
+    // user join
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user_id;
 
     @Builder
-    public Answers(int emoji, String answer, LocalDate date){
+    public Answers(int emoji, String answer, LocalDate date, Question question_id, User user_id){
         this.emoji = emoji;
         this.answer = answer;
         this.date = date;
+        this.question_id = question_id;
+        this.user_id = user_id;
     }
 }

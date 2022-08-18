@@ -2,8 +2,8 @@ package com.server.grad.web.web;
 
 import com.server.grad.domain.User;
 import com.server.grad.domain.UserRepository;
-import com.server.grad.dto.UserSaveRequestDto;
-import com.server.grad.dto.UserUpdateRequestDto;
+import com.server.grad.dto.user.UserSaveRequestDto;
+import com.server.grad.dto.user.UserUpdateRequestDto;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
