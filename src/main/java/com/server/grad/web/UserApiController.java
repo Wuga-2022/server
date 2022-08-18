@@ -4,11 +4,15 @@ import com.server.grad.dto.user.UserResponseDto;
 import com.server.grad.dto.user.UserSaveRequestDto;
 import com.server.grad.dto.user.UserUpdateRequestDto;
 import com.server.grad.service.UserService;
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+@Api(value="User Controller", tags = "")
 @RequiredArgsConstructor
 @RestController
+@Slf4j
 public class UserApiController {
 
     private final UserService userService;

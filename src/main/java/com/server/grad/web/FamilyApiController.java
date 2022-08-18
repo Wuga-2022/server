@@ -2,8 +2,6 @@ package com.server.grad.web;
 
 import com.server.grad.dto.FamilyResponseDto;
 import com.server.grad.dto.FamilyUpdateRequestDto;
-import com.server.grad.dto.UserResponseDto;
-import com.server.grad.dto.UserUpdateRequestDto;
 import com.server.grad.service.FamilyService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
