@@ -50,7 +50,6 @@ public class UserApiControllerTest {
                 .name(name)
                 .email(email)
                 .role(role)
-                .family_code(family_code)
                 .build();
 
         String url = "http://localhost:" + port + "/user";
@@ -65,7 +64,7 @@ public class UserApiControllerTest {
 
     @Test
     public void updateUser() throws Exception {
-        User savedUser = userRepository.save(User.builder().name("user2").role("papa").email("go@gle").family_code(12L).build());
+        User savedUser = userRepository.save(User.builder().name("user2").role("papa").email("go@gle").build());
 
         Object updateId = savedUser.getId();
         String expectedName = "u3";
@@ -73,7 +72,7 @@ public class UserApiControllerTest {
         String expectedEmail = "Na@ver";
         Long expectedFamilycode = 13l;
 
-        UserUpdateRequestDto requestDto = UserUpdateRequestDto.builder().name(expectedName).role(expectedRole).email(expectedEmail).family_code(expectedFamilycode).build();
+        UserUpdateRequestDto requestDto = UserUpdateRequestDto.builder().name(expectedName).role(expectedRole).email(expectedEmail).build();
 
         String url = "http://localhost:" + port + "/user/" + updateId;
 

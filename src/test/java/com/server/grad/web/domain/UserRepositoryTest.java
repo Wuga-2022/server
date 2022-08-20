@@ -37,7 +37,6 @@ public class UserRepositoryTest {
                 .name(name)
                 .role(role)
                 .email(email)
-                .family_code(family_code)
                 .build());
 
         List<User> userList = userRepository.findAll();

@@ -14,15 +14,14 @@ public class Family {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "family_id")
     private Long id;
 
     @Column(nullable = false)
-    private int points = 0;
-
-    // 아이템 목록 테이블 필요
+    private String familycode;
 
     @Builder
-    public Family(int points){
-        this.points = points;
+    public Family(String familycode){
+        this.familycode = familycode;
     }
 }

@@ -11,14 +11,12 @@ public class UserSaveRequestDto {
     private String name;
     private String email;
     private String role;
-    private Long family_code;
 
     @Builder
-    public UserSaveRequestDto(String name, String email, String role, Long family_code){
+    public UserSaveRequestDto(String name, String email, String role){
         this.name = name;
         this.email = email;
         this.role = role;
-        this.family_code = family_code;
     }
 
     //request dto로 받은 user 객체를 entity화 하여 저장
@@ -27,7 +25,6 @@ public class UserSaveRequestDto {
                 .name(name)
                 .email(email)
                 .role(role)
-                .family_code(family_code)
                 .build();
     }
 }

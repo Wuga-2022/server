@@ -26,24 +26,24 @@ public class User {
     @Column(nullable = false)
     private String role;
 
-    @Column(nullable = false)
-    private Long family_code;
+    @ManyToOne
+    @JoinColumn(name = "family_id")
+    private Family family_id;
 
 //    @Column
 //    private ?? 프로필 사진
 
     @Builder
-    public User(String name, String email, String role, Long family_code){
+    public User(String name, String email, String role, Family family_id){
         this.name = name;
         this.email = email;
         this.role = role;
-        this.family_code = family_code;
+        this.family_id = family_id;
     }
 
-    public void update(String name, String email, String role, Long family_code){
+    public void update(String name, String email, String role){
         this.name = name;
         this.email = email;
         this.role = role;
-        this.family_code = family_code;
     }
 }
