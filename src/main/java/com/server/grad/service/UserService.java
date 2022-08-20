@@ -4,6 +4,7 @@ import com.server.grad.domain.User;
 import com.server.grad.domain.UserRepository;
 import com.server.grad.dto.user.UserResponseDto;
 import com.server.grad.dto.user.UserSaveRequestDto;
+import com.server.grad.dto.user.UserUpdateFamilyDto;
 import com.server.grad.dto.user.UserUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,16 @@ public class UserService {
         user.update(requestDto.getName(), requestDto.getEmail(), requestDto.getRole());
 
         return id;
+   }
+
+   @Transactional
+   public Long updateFamily(Long id, UserUpdateFamilyDto requestDto){
+       User user = userRepository.findById(id)
+               .orElseThrow(() -> new IllegalArgumentException("해당 유저 정보 없음 = " + id));
+
+       user.updateFamily(requestDto.getFamily_id());
+
+       return id;
    }
 
     public UserResponseDto findById(Long id){

@@ -1,10 +1,13 @@
 package com.server.grad.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -26,9 +29,15 @@ public class User {
     @Column(nullable = false)
     private String role;
 
+    // N : 1 family join
     @ManyToOne
     @JoinColumn(name = "family_id")
     private Family family_id;
+
+    // 1 : N answer join
+    @JsonIgnoreProperties({"user_id"})
+    @OneToMany(mappedBy = "user_id", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    private List<Answers> answers = new ArrayList<>();
 
 //    @Column
 //    private ?? 프로필 사진
@@ -45,5 +54,9 @@ public class User {
         this.name = name;
         this.email = email;
         this.role = role;
+    }
+
+    public void updateFamily(Family family_id){
+        this.family_id = family_id;
     }
 }
