@@ -1,6 +1,7 @@
-package com.server.grad.dto;
+package com.server.grad.dto.mission;
 
 import com.server.grad.domain.Mission;
+import com.server.grad.dto.CommentsResponseDto;
 import lombok.Getter;
 
 import java.time.LocalDate;
@@ -11,13 +12,8 @@ import java.util.stream.Collectors;
 public class MissionResponseDto {
     private Long id;
     private LocalDate date;
-
-    //타입 이미지로 수정
     private String mission_image;
-
-    //타입 이미지로 수정
     private   String fam_image;
-
     private int similarity;
     private Boolean success;
     private List<CommentsResponseDto> comments;

@@ -5,10 +5,9 @@ import lombok.Getter;
 
 @Getter
 public class FamilyResponseDto {
-
-    private int points;
+    private String familycode;
 
     public FamilyResponseDto(Family entity){
-        this.points = entity.getPoints();
+        this.familycode = entity.getFamilycode();
     }
 }

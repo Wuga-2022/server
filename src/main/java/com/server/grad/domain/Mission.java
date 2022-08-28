@@ -21,11 +21,9 @@ public class Mission {
     @Column(name = "mission_id")
     private Long id;
 
-    //타입 이미지로 바꾸기
     @Column(nullable = false)
     private String mission;
 
-    //타입 이미지로 바꾸기
     @Column
     private String fam_image;
 
