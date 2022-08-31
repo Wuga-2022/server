@@ -61,6 +61,12 @@ public class User {
         this.member = member;
     }
 
+    public User updateSocial(String name){
+        this.name = name;
+
+        return this;
+    }
+
     public void updateFamily(Family family_id){
         this.family_id = family_id;
     }

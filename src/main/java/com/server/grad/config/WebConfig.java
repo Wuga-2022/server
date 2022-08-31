@@ -1,6 +1,6 @@
 package com.server.grad.config;
 
-import com.server.grad.config.auth.LoginUserArgmentResolver;
+import com.server.grad.config.auth.LoginUserArgumentResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -12,10 +12,10 @@ import java.util.List;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    private final LoginUserArgmentResolver loginUserArgmentResolver;
+    private final LoginUserArgumentResolver loginUserArgumentResolver;
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-        resolvers.add(loginUserArgmentResolver);
+        resolvers.add(loginUserArgumentResolver);
     }
 }

@@ -38,7 +38,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         // 서비스 통해서 가져온 OAuth2User의 attribute 담는 클래스.
         OAuthAttributes attributes = OAuthAttributes.of(regristrationId, userNameAttributeName, oAuth2User.getAttributes());
 
-        User user = saveUser(attributes);
+        User user = saveOrUpdate(attributes);
 
         httpSession.setAttribute("user", new SessionUser(user));
 
@@ -49,10 +49,12 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         );
     }
 
-    private User saveUser(OAuthAttributes attributes){
+    // 2번 저장되는거 수정해야함
+    private User saveOrUpdate(OAuthAttributes attributes){
         User user = userRepository.findByEmail(attributes.getEmail())
-                .orElse(userRepository.save(attributes.toEntity()));
+                .map(entity -> entity.updateSocial(attributes.getName()))
+                .orElse(attributes.toEntity());
 
-        return user;
+        return userRepository.save(user);
     }
 }

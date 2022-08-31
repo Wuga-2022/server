@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .logoutSuccessUrl("/")
                 .and()
                     .oauth2Login()
-                    .defaultSuccessUrl("/swagger-ui.html")
+                    .defaultSuccessUrl("/loginSuccess")
                     .userInfoEndpoint()
                     .userService(customOAuth2UserService);
     }
