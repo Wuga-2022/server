@@ -26,6 +26,7 @@ public class FamilyApiController {
     }
 
     @PostMapping("/familycode/{u_id}")
+    @ApiOperation(value = "가족 코드 입력", notes = "코드 입력한 유저의 가족 결정됨")
     public Long putFamilyCode(@PathVariable Long u_id, @RequestParam String familycode){
         return familyService.updateUserFamCode(u_id, familycode);
     }

@@ -1,6 +1,5 @@
 package com.server.grad.dto.user;
 
-import com.server.grad.domain.Family;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,12 +9,12 @@ import lombok.NoArgsConstructor;
 public class UserUpdateRequestDto {
     private String name;
     private String email;
-    private String role;
+    private String member;
 
     @Builder
-    public UserUpdateRequestDto(String name, String email, String role){
+    public UserUpdateRequestDto(String name, String email, String member){
         this.name = name;
         this.email = email;
-        this.role = role;
+        this.member = member;
     }
 }

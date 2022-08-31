@@ -10,13 +10,13 @@ import lombok.NoArgsConstructor;
 public class UserSaveRequestDto {
     private String name;
     private String email;
-    private String role;
+    private String member;
 
     @Builder
-    public UserSaveRequestDto(String name, String email, String role){
+    public UserSaveRequestDto(String name, String email, String member){
         this.name = name;
         this.email = email;
-        this.role = role;
+        this.member = member;
     }
 
     //request dto로 받은 user 객체를 entity화 하여 저장
@@ -24,7 +24,7 @@ public class UserSaveRequestDto {
         return User.builder()
                 .name(name)
                 .email(email)
-                .role(role)
+                .member(member)
                 .build();
     }
 }

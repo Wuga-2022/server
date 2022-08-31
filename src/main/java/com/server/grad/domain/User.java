@@ -26,8 +26,12 @@ public class User {
     @Column(nullable = false)
     private String email;
 
+    @Column
+    private String member;
+
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String role;
+    private Role role;
 
     // N : 1 family join
     @ManyToOne
@@ -43,20 +47,25 @@ public class User {
 //    private ?? 프로필 사진
 
     @Builder
-    public User(String name, String email, String role, Family family_id){
+    public User(String name, String email, String member, Role role, Family family_id){
         this.name = name;
         this.email = email;
+        this.member = member;
         this.role = role;
         this.family_id = family_id;
     }
 
-    public void update(String name, String email, String role){
+    public void update(String name, String email, String member){
         this.name = name;
         this.email = email;
-        this.role = role;
+        this.member = member;
     }
 
     public void updateFamily(Family family_id){
         this.family_id = family_id;
+    }
+
+    public String getRoleKey(){
+        return this.role.getKey();
     }
 }
