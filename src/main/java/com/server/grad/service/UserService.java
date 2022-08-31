@@ -33,13 +33,13 @@ public class UserService {
    }
 
    @Transactional
-   public Long updateFamily(Long id, UserUpdateFamilyDto requestDto){
-       User user = userRepository.findById(id)
-               .orElseThrow(() -> new IllegalArgumentException("해당 유저 정보 없음 = " + id));
+   public Long updateFamily(String email, UserUpdateFamilyDto requestDto){
+       User user = userRepository.findByEmail(email)
+               .orElseThrow(() -> new IllegalArgumentException("해당 유저 정보 없음 = " + email));
 
        user.updateFamily(requestDto.getFamily_id());
 
-       return id;
+       return user.getId();
    }
 
     public UserResponseDto findById(Long id){

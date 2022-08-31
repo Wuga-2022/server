@@ -1,5 +1,7 @@
 package com.server.grad.web;
 
+import com.server.grad.config.auth.LoginUser;
+import com.server.grad.config.auth.dto.SessionUser;
 import com.server.grad.domain.User;
 import com.server.grad.dto.family.FamilySaveRequestDto;
 import com.server.grad.service.FamilyService;
@@ -19,16 +21,16 @@ public class FamilyApiController {
     private final FamilyService familyService;
 
     // 나중에 u_id -> @SessionUser로 바꾸기
-    @GetMapping("/familycode/{u_id}")
+    @GetMapping("/familycode")
     @ApiOperation(value = "가족 코드 생성", notes = "코드 생성한 유저의 가족 결정됨")
-    public String getFamilyCode(@PathVariable Long u_id){
-        return familyService.createCode(u_id);
+    public String getFamilyCode(@LoginUser SessionUser user){
+        return familyService.createCode(user.getEmail());
     }
 
-    @PostMapping("/familycode/{u_id}")
+    @PostMapping("/familycode")
     @ApiOperation(value = "가족 코드 입력", notes = "코드 입력한 유저의 가족 결정됨")
-    public Long putFamilyCode(@PathVariable Long u_id, @RequestParam String familycode){
-        return familyService.updateUserFamCode(u_id, familycode);
+    public Long putFamilyCode(@LoginUser SessionUser user, @RequestParam String familycode){
+        return familyService.updateUserFamCode(user.getEmail(), familycode);
     }
 
 }
