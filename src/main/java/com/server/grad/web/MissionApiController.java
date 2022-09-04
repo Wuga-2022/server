@@ -16,7 +16,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Api(value="Mission Controller", tags = "")
 @RestController
@@ -27,18 +30,30 @@ public class MissionApiController {
     private final MissionService missionService;
     private final S3Service s3Service;
 
+    @PostMapping(value = "/missions/test", consumes = {"multipart/form-data"})
+    public MissionResponseDto create(@RequestPart(value="mission") Map<Object, String> mission,
+                          @RequestPart(value = "images", required = false) List<MultipartFile> images) throws IOException {
+        System.out.println("mission = " + mission);
+        List<String> imageList = new ArrayList<>();
+        if (images != null) {
+            imageList = s3Service.upload(images);
+        }
+        return missionService.upload(mission, imageList);
+    }
+
     @GetMapping("/missions")
     @ApiOperation(value = "모든 미션 반환")
     public List<Mission> getAll(){
         return missionService.getAll();
     }
 
+    /*
     @GetMapping("/mission/{id}")
     @ApiOperation(value = "미션 정보 반환", notes = "미션 id에 맞게 반환")
     public MissionResponseDto findById(@PathVariable Long id){
         return missionService.findById(id);
     }
-
+*/
     @PostMapping("mission/{id}")
     @ApiOperation(value = "미션 등록")
     public Long save(@RequestBody MissionSaveRequestDto requestDto){
@@ -69,11 +84,13 @@ public class MissionApiController {
     public ResponseEntity<String> deleteFile(@PathVariable String fileName){
         return new ResponseEntity<>(s3Service.deleteFile(fileName), HttpStatus.ACCEPTED);
     }
-
+/*
     @GetMapping("/mission/comments/{id}")
     @ApiOperation(value = "모든 댓글 반환", notes = "미션 id에 맞는 모든 댓글 반환")
     public List<CommentsResponseDto> read(@PathVariable Long id){
         MissionResponseDto dto = missionService.findById(id);
         return dto.getComments();
     }
+
+ */
 }

@@ -14,12 +14,12 @@ import java.time.LocalDate;
 public class MissionSaveRequestDto {
     private String mission;
     private String fam_image;
-    private LocalDate date;
+    private int date;
     private int similarity;
     private Boolean success;
 
     @Builder
-    MissionSaveRequestDto(String mission, String fam_image, LocalDate date, int similarity, Boolean success){
+    MissionSaveRequestDto(String mission, String fam_image, int date, int similarity, Boolean success){
         this.mission = mission;
         this.fam_image = fam_image;
         this.date = date;
@@ -30,7 +30,6 @@ public class MissionSaveRequestDto {
     public Mission toEntity(){
         Mission mission1 = Mission.builder()
                 .mission(mission)
-                .fam_image(fam_image)
                 .date(date)
                 .similarity(similarity)
                 .success(success)

@@ -19,6 +19,10 @@ import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Transactional
 @Service
@@ -27,6 +31,9 @@ import java.io.IOException;
 public class S3Service {
 
     private AmazonS3 s3Client;
+
+    public static final String CLOUD_FRONT_DOMAIN_NAME = "d1hop3qdderj3r.cloudfront.net"; //CloudFront 도메인명 (조회 시 사용)
+
 
     @Value("${cloud.aws.credentials.accessKey}")
     private String accessKey;
@@ -56,6 +63,24 @@ public class S3Service {
         s3Client.putObject(new PutObjectRequest(bucket, fileName, fileObj));
         fileObj.delete();
         return "File uploaded : " + fileName;
+    }
+
+    public List<String> upload(List<MultipartFile> files) throws IOException {
+        List<String> fileNames = new ArrayList<>();
+
+        for (MultipartFile file : files) {
+            String fileName = file.getOriginalFilename();
+
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd"); // 폴더 이름 업로드 날짜로 바꾸기
+            String folderName = simpleDateFormat.format(new Date());
+            String newFileName = Long.toString(System.nanoTime()) + fileName; // 파일명 변경
+
+            s3Client.putObject(new PutObjectRequest(bucket, folderName + "/" + newFileName, file.getInputStream(), null)
+                    .withCannedAcl(CannedAccessControlList.PublicRead)); // read 권한 추가 후 업로드
+            fileNames.add(folderName + "/" + newFileName); // S3 객체를 식별하는 key값
+        }
+
+        return fileNames;
     }
 
     public byte[] downloadFile(String fileName){
