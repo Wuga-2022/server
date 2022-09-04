@@ -6,9 +6,9 @@ import lombok.Getter;
 @Getter
 public class FamilyResponseDto {
 
-    private int points;
-
-    public FamilyResponseDto(Family entity){
-        this.points = entity.getPoints();
-    }
+//    private int points;
+//
+//    public FamilyResponseDto(Family entity){
+//        this.points = entity.getPoints();
+//    }
 }

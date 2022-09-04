@@ -1,11 +1,14 @@
 package com.server.grad.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -19,6 +22,11 @@ public class Family {
 
     @Column(nullable = false)
     private String familycode;
+
+    // 1 : N user join
+    @JsonIgnoreProperties({"family_id"})
+    @OneToMany(mappedBy = "family_id", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    private List<User> users = new ArrayList<>();
 
     @Builder
     public Family(String familycode){
