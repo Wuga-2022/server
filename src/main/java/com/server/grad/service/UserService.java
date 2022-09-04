@@ -25,7 +25,7 @@ public class UserService {
     @Transactional
     public Long update(Long id, UserUpdateRequestDto requestDto){
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 유저 정보 없음 = " + id));
+                .orElseThrow(() -> new IllegalArgumentException("해당 유저 정보가 없습니다." + id));
 
         user.update(requestDto.getName(), requestDto.getEmail(), requestDto.getMember());
 
@@ -44,7 +44,7 @@ public class UserService {
 
     public UserResponseDto findById(Long id){
         User entity = userRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 유저 정보 없음 = " + id));
+                .orElseThrow(() -> new IllegalArgumentException("해당 유저 정보가 없습니다." + id));
 
         return new UserResponseDto(entity);
     }

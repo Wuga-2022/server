@@ -1,5 +1,6 @@
 package com.server.grad.web;
 
+import com.server.grad.dto.CommentsResponseDto;
 import com.server.grad.service.MissionService;
 import com.server.grad.dto.MissionResponseDto;
 import io.swagger.annotations.Api;
@@ -9,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @Api(value="Mission Controller", tags = "")
 @RestController
@@ -24,4 +27,10 @@ public class MissionApiController {
         return missionService.findById(id);
     }
 
+
+    @GetMapping("/mission/comments/{id}")
+    public List<CommentsResponseDto> read(@PathVariable Long id){
+        MissionResponseDto dto = missionService.findById(id);
+        return  dto.getComments();
+    }
 }

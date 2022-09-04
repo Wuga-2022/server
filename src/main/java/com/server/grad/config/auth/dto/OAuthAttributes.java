@@ -27,6 +27,9 @@ public class OAuthAttributes {
         if("naver".equals(registraionId)){
             return ofNaver("id", attributes);
         }
+        else if("facebook".equals(registraionId)){
+            return ofFacebook(userNameAttributeName, attributes);
+        }
         return ofGoogle(userNameAttributeName, attributes);
     }
 
@@ -51,6 +54,17 @@ public class OAuthAttributes {
                 .nameAttributeKey(userNameAttributeName)
                 .build();
     }
+
+    // Facebook Login
+    private static OAuthAttributes ofFacebook(String userNameAttributeName, Map<String, Object> attributes){
+        return OAuthAttributes.builder()
+                .name((String) attributes.get("name"))
+                .email((String) attributes.get("email"))
+                .attributes(attributes)
+                .nameAttributeKey(userNameAttributeName)
+                .build();
+    }
+
 
     // 처음 가입할 때 필요
     public User toEntity(){

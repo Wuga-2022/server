@@ -17,17 +17,30 @@ public class Comments {
     private Long id;
 
     @Column
+    private  int emoji;
+
+    @Column
     private String comment;
 
     @Column
     private LocalDate date;
 
-//    @Column
-//    private 유저 이름 유저 테이블에서 가져오기
+    //mission join
+    @ManyToOne
+    @JoinColumn(name = "mission_id")
+    private Mission mission_id;
+
+    //user join
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user_id;
 
     @Builder
-    public Comments(String comment, LocalDate date){
+    public Comments(int emoji, String comment, LocalDate date, Mission mission_id, User user_id){
+        this.emoji = emoji;
         this.comment = comment;
         this.date = date;
+        this.mission_id = mission_id;
+        this.user_id = user_id;
     }
 }

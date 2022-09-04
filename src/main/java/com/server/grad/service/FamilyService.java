@@ -1,8 +1,12 @@
 package com.server.grad.service;
 
+import com.server.grad.domain.Family;
 import com.server.grad.domain.FamilyRepository;
 import com.server.grad.domain.User;
 import com.server.grad.domain.UserRepository;
+
+import com.server.grad.dto.FamilyResponseDto;
+
 import com.server.grad.dto.family.FamilySaveRequestDto;
 import com.server.grad.dto.user.UserUpdateFamilyDto;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +22,13 @@ public class FamilyService {
     private final FamilyRepository familyRepository;
     private final UserRepository userRepository;
     private final UserService userService;
+
+//    public FamilyResponseDto findById(Long id) {
+//        Family entity = familyRepository.findById(id)
+//                .orElseThrow(() -> new IllegalArgumentException("해당 가족 정보 없음 = " + id));
+//
+//        return new FamilyResponseDto(entity);
+//    }
 
     @Transactional
     public Long updateUserFamCode(String email, String familycode){
@@ -51,5 +62,6 @@ public class FamilyService {
         userRepository.save(user);
 
         return generatedString;
+
     }
 }
