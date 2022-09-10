@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,7 @@ public class MissionService {
 
     public MissionResponseDto upload(Map<Object, String> missionInfo, List<String> files) {
         String mission = missionInfo.get("mission");
-        int date = Integer.parseInt(missionInfo.get("date"));
+        LocalDate date = LocalDate.parse(missionInfo.get("date"));
         int similarity = Integer.parseInt(missionInfo.get("similarity"));
         Boolean success = Boolean.parseBoolean(missionInfo.get("success"));
         List<Comments> comments = null;

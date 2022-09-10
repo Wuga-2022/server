@@ -19,7 +19,7 @@ public class MissionResponseDto {
     private Long id;
     private String mission;
     private List<String> images;
-    private int date;
+    private LocalDate date;
     private int similarity;
     private Boolean success;
     private List<CommentsResponseDto> comments;

@@ -30,7 +30,7 @@ public class Mission {
     private List<Image> images = new ArrayList<>();
 
     @Column
-    private int date;
+    private LocalDate date;
 
     @Column
     private int similarity;
@@ -44,7 +44,7 @@ public class Mission {
     private List<Comments> comments = new ArrayList<>();
 
     @Builder
-    public Mission(String mission, int date, int similarity, Boolean success, List<Comments> comments){
+    public Mission(String mission, LocalDate date, int similarity, Boolean success, List<Comments> comments){
         this.mission = mission;
         this.date = date;
         this.similarity = similarity;
@@ -52,7 +52,7 @@ public class Mission {
         this.comments = comments;
     }
 
-    public static Mission createMission(String mission, int date, int similarity, Boolean success, List<Comments> comments){
+    public static Mission createMission(String mission, LocalDate date, int similarity, Boolean success, List<Comments> comments){
         Mission mission1 = new Mission();
         mission1.setMission(mission);
         mission1.setDate(date);
