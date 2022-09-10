@@ -74,7 +74,7 @@ public class MissionService {
         for (Image image : images) {
             s3Service.deleteFile(image.getFilePath());
         }
-        //missionRepository.delete(mission);
+        missionRepository.delete(mission);
     }
 
     @Transactional
@@ -82,12 +82,11 @@ public class MissionService {
         return missionRepository.findAll();
     }
 
-    /*
     public MissionResponseDto findById(Long id) {
         Mission entity = missionRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 미션 없음(생성 필요)"));
 
         return new MissionResponseDto(entity);
     }
-*/
+
 }

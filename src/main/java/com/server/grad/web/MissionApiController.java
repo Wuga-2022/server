@@ -30,7 +30,7 @@ public class MissionApiController {
     private final MissionService missionService;
     private final S3Service s3Service;
 
-    @PostMapping(value = "mission/{id}", consumes = {"multipart/form-data"})
+    @PostMapping(value = "/mission", consumes = {"multipart/form-data"})
     @ApiOperation(value = "미션 등록")
     public MissionResponseDto create(@RequestPart(value="mission") Map<Object, String> mission,
                           @RequestPart(value = "images", required = false) List<MultipartFile> images) throws IOException {
@@ -62,12 +62,12 @@ public class MissionApiController {
 
     @ResponseBody
     @RequestMapping("/mission/delete/{id}")
-    @ApiOperation(value = "미션 사진 삭제")
+    @ApiOperation(value = "미션 삭제")
     public String delete(@PathVariable long id) throws IOException {
         missionService.deleteMission(id);
         return "delete success";
     }
-/*
+
     @GetMapping("/mission/{id}")
     @ApiOperation(value = "미션 정보 반환", notes = "미션 id에 맞게 반환")
     public MissionResponseDto findById(@PathVariable Long id){
@@ -80,5 +80,5 @@ public class MissionApiController {
         MissionResponseDto dto = missionService.findById(id);
         return dto.getComments();
     }
-*/
+
 }

@@ -3,9 +3,7 @@ package com.server.grad.dto.mission;
 import com.server.grad.domain.Image;
 import com.server.grad.domain.Mission;
 import com.server.grad.dto.CommentsResponseDto;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,6 +13,8 @@ import java.util.stream.Collectors;
 @Getter
 @Builder
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class MissionResponseDto {
     private Long id;
     private String mission;
@@ -24,7 +24,6 @@ public class MissionResponseDto {
     private Boolean success;
     private List<CommentsResponseDto> comments;
 
-    /*
     public MissionResponseDto(Mission entity){
         this.id = entity.getId();
         this.mission = entity.getMission();
@@ -34,5 +33,5 @@ public class MissionResponseDto {
         this.success = entity.getSuccess();
         this.comments = entity.getComments().stream().map(CommentsResponseDto::new).collect(Collectors.toList());
     }
-*/
+
 }
