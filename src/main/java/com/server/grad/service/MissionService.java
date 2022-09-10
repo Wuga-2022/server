@@ -1,21 +1,15 @@
 package com.server.grad.service;
 
 import com.server.grad.domain.*;
-import com.server.grad.dto.CommentsResponseDto;
 import com.server.grad.dto.mission.MissionResponseDto;
-import com.server.grad.dto.mission.MissionSaveRequestDto;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 
 @Service
@@ -72,9 +66,14 @@ public class MissionService {
         return singlemission;
     }
 
-    @Transactional
-    public Long save(MissionSaveRequestDto requestDto){
-        return missionRepository.save(requestDto.toEntity()).getId();
+    public void deleteMission(Long id) {
+        Mission mission = missionRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 미션 없음"));
+        List<Image> images = mission.getImages();
+        for (Image image : images) {
+            s3Service.deleteFile(image.getFilePath());
+        }
+        //missionRepository.delete(mission);
     }
 
     @Transactional
@@ -89,6 +88,5 @@ public class MissionService {
 
         return new MissionResponseDto(entity);
     }
-
-     */
+*/
 }

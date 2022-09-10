@@ -2,10 +2,10 @@ package com.server.grad.web;
 
 import com.server.grad.domain.Mission;
 import com.server.grad.dto.CommentsResponseDto;
-import com.server.grad.dto.mission.MissionSaveRequestDto;
 import com.server.grad.service.MissionService;
 import com.server.grad.dto.mission.MissionResponseDto;
 import com.server.grad.service.S3Service;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +30,8 @@ public class MissionApiController {
     private final MissionService missionService;
     private final S3Service s3Service;
 
-    @PostMapping(value = "/missions/test", consumes = {"multipart/form-data"})
+    @PostMapping(value = "mission/{id}", consumes = {"multipart/form-data"})
+    @ApiOperation(value = "미션 등록")
     public MissionResponseDto create(@RequestPart(value="mission") Map<Object, String> mission,
                           @RequestPart(value = "images", required = false) List<MultipartFile> images) throws IOException {
         System.out.println("mission = " + mission);
@@ -40,32 +41,6 @@ public class MissionApiController {
         }
         return missionService.upload(mission, imageList);
     }
-
-    @GetMapping("/missions")
-    @ApiOperation(value = "모든 미션 반환")
-    public List<Mission> getAll(){
-        return missionService.getAll();
-    }
-
-    /*
-    @GetMapping("/mission/{id}")
-    @ApiOperation(value = "미션 정보 반환", notes = "미션 id에 맞게 반환")
-    public MissionResponseDto findById(@PathVariable Long id){
-        return missionService.findById(id);
-    }
-*/
-    @PostMapping("mission/{id}")
-    @ApiOperation(value = "미션 등록")
-    public Long save(@RequestBody MissionSaveRequestDto requestDto){
-        return missionService.save(requestDto);
-    }
-
-    @PostMapping("/file/upload")
-    @ApiOperation(value = "S3에 파일 업로드")
-    public ResponseEntity<String> uploadFile(@RequestParam(value = "file") MultipartFile file){
-        return new ResponseEntity<>(s3Service.uploadFile(file), HttpStatus.ACCEPTED);
-    }
-
     @GetMapping("/file/download/{fileName}")
     @ApiOperation(value = "S3의 파일 다운로드")
     public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable String fileName){
@@ -79,18 +54,31 @@ public class MissionApiController {
                 .body(resource);
     }
 
-    @DeleteMapping("/file/delete/{fileName}")
-    @ApiOperation(value = "S3의 파일 삭제")
-    public ResponseEntity<String> deleteFile(@PathVariable String fileName){
-        return new ResponseEntity<>(s3Service.deleteFile(fileName), HttpStatus.ACCEPTED);
+    @GetMapping("/missions")
+    @ApiOperation(value = "모든 미션 반환")
+    public List<Mission> getAll(){
+        return missionService.getAll();
+    }
+
+    @ResponseBody
+    @RequestMapping("/mission/delete/{id}")
+    @ApiOperation(value = "미션 사진 삭제")
+    public String delete(@PathVariable long id) throws IOException {
+        missionService.deleteMission(id);
+        return "delete success";
     }
 /*
+    @GetMapping("/mission/{id}")
+    @ApiOperation(value = "미션 정보 반환", notes = "미션 id에 맞게 반환")
+    public MissionResponseDto findById(@PathVariable Long id){
+        return missionService.findById(id);
+    }
+
     @GetMapping("/mission/comments/{id}")
     @ApiOperation(value = "모든 댓글 반환", notes = "미션 id에 맞는 모든 댓글 반환")
     public List<CommentsResponseDto> read(@PathVariable Long id){
         MissionResponseDto dto = missionService.findById(id);
         return dto.getComments();
     }
-
- */
+*/
 }

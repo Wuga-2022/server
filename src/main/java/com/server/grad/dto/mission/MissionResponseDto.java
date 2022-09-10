@@ -13,12 +13,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
-@Setter
 @Builder
+@Setter
 public class MissionResponseDto {
     private Long id;
     private String mission;
-
     private List<String> images;
     private int date;
     private int similarity;
@@ -29,11 +28,11 @@ public class MissionResponseDto {
     public MissionResponseDto(Mission entity){
         this.id = entity.getId();
         this.mission = entity.getMission();
+        //this.images = entity.getImages();
         this.date = entity.getDate();
         this.similarity = entity.getSimilarity();
         this.success = entity.getSuccess();
         this.comments = entity.getComments().stream().map(CommentsResponseDto::new).collect(Collectors.toList());
     }
-
-     */
+*/
 }

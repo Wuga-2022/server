@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -31,8 +30,6 @@ public class Mission {
     private List<Image> images = new ArrayList<>();
 
     @Column
-    //@DateTimeFormat(pattern = "yyyy-MM-dd")
-    //private LocalDate date;
     private int date;
 
     @Column
