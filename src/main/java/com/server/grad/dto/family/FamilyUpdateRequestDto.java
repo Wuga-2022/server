@@ -1,4 +1,4 @@
-package com.server.grad.dto;
+package com.server.grad.dto.family;
 
 import lombok.Builder;
 import lombok.Getter;

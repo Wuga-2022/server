@@ -1,5 +1,7 @@
 package com.server.grad.web;
 
+import com.server.grad.config.auth.LoginUser;
+import com.server.grad.config.auth.dto.SessionUser;
 import com.server.grad.dto.user.UserResponseDto;
 import com.server.grad.dto.user.UserSaveRequestDto;
 import com.server.grad.dto.user.UserUpdateRequestDto;
@@ -22,13 +24,13 @@ public class UserApiController {
         return userService.save(requestDto);
     }
 
-    @PutMapping("/user/{id}")
-    public Long update(@PathVariable Long id, @RequestBody UserUpdateRequestDto requestDto) {
-        return userService.update(id, requestDto);
+    @PutMapping("/user")
+    public Long update(@LoginUser SessionUser user, @RequestBody UserUpdateRequestDto requestDto) {
+        return userService.update(user.getEmail(), requestDto);
     }
 
-    @GetMapping("/user/{id}")
-    public UserResponseDto findById(@PathVariable Long id) {
-        return userService.findById(id);
+    @GetMapping("/user")
+    public UserResponseDto findById(@LoginUser SessionUser user) {
+        return userService.findById(user.getId());
     }
 }

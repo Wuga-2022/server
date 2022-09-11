@@ -20,7 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().disable()
                 .and()
                     .authorizeRequests()
-                    .antMatchers("/","/swagger-ui.html").permitAll()
+                    .antMatchers("*").permitAll()
                     .anyRequest().authenticated()
                 .and()
                     .logout()

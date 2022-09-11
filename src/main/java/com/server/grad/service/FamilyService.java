@@ -5,7 +5,7 @@ import com.server.grad.domain.FamilyRepository;
 import com.server.grad.domain.User;
 import com.server.grad.domain.UserRepository;
 
-import com.server.grad.dto.FamilyResponseDto;
+import com.server.grad.dto.family.FamilyResponseDto;
 
 import com.server.grad.dto.family.FamilySaveRequestDto;
 import com.server.grad.dto.user.UserUpdateFamilyDto;
