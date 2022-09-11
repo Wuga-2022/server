@@ -55,15 +55,13 @@ public class User {
         this.family_id = family_id;
     }
 
-    public void update(String name, String email, String member){
+    public void update(String name, String member){
         this.name = name;
-        this.email = email;
         this.member = member;
     }
 
     public User updateSocial(String name){
         this.name = name;
-
         return this;
     }
 

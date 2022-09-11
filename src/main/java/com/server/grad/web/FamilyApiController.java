@@ -2,7 +2,6 @@ package com.server.grad.web;
 
 import com.server.grad.config.auth.LoginUser;
 import com.server.grad.config.auth.dto.SessionUser;
-import com.server.grad.dto.FamilyResponseDto;
 
 import com.server.grad.service.FamilyService;
 import io.swagger.annotations.Api;

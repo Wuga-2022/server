@@ -9,6 +9,7 @@ import org.hibernate.annotations.ColumnDefault;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @NoArgsConstructor
@@ -27,6 +28,7 @@ public class Family {
     @JsonIgnoreProperties({"family_id"})
     @OneToMany(mappedBy = "family_id", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<User> users = new ArrayList<>();
+
 
     @Builder
     public Family(String familycode){

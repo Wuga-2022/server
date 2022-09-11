@@ -8,13 +8,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserUpdateRequestDto {
     private String name;
-    private String email;
     private String member;
 
     @Builder
-    public UserUpdateRequestDto(String name, String email, String member){
+    public UserUpdateRequestDto(String name,String member){
         this.name = name;
-        this.email = email;
         this.member = member;
     }
 }
