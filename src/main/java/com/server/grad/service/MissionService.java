@@ -1,6 +1,7 @@
 package com.server.grad.service;
 
 import com.server.grad.domain.*;
+import com.server.grad.dto.CommentsResponseDto;
 import com.server.grad.dto.mission.MissionResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -30,7 +32,6 @@ public class MissionService {
         int similarity = Integer.parseInt(missionInfo.get("similarity"));
         Boolean success = Boolean.parseBoolean(missionInfo.get("success"));
         List<Comments> comments = null;
-
         Mission mission1 = Mission.createMission(mission, date, similarity, success, comments);
 
         if (!files.isEmpty()) {
@@ -54,7 +55,7 @@ public class MissionService {
                 .mission(mission1.getMission())
                 .similarity(mission1.getSimilarity())
                 .success(mission1.getSuccess())
-                //.comments(mission1.getComments().stream().map(CommentsResponseDto::new).collect(Collectors.toList()))
+                .comments(mission1.getComments().stream().map(CommentsResponseDto::new).collect(Collectors.toList()))
                 .build();
 
         List<Image> images = mission1.getImages();

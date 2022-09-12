@@ -27,7 +27,7 @@ public class MissionResponseDto {
     public MissionResponseDto(Mission entity){
         this.id = entity.getId();
         this.mission = entity.getMission();
-        //this.images = entity.getImages();
+        this.images = entity.getImages().stream().map(String::valueOf).collect(Collectors.toList());
         this.date = entity.getDate();
         this.similarity = entity.getSimilarity();
         this.success = entity.getSuccess();
