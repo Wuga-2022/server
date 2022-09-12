@@ -1,6 +1,5 @@
 package com.server.grad.web;
 
-import com.server.grad.dto.FamilyResponseDto;
 import com.server.grad.dto.family.FamilySaveRequestDto;
 
 import com.server.grad.service.FamilyService;

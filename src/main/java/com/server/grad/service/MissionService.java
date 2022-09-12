@@ -1,13 +1,12 @@
 package com.server.grad.service;
 
 import com.server.grad.domain.*;
-import com.server.grad.dto.CommentsResponseDto;
+import com.server.grad.dto.comment.CommentsResponseDto;
 import com.server.grad.dto.mission.MissionResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

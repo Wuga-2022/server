@@ -1,12 +1,10 @@
 package com.server.grad.dto.mission;
 
-import com.server.grad.domain.Image;
 import com.server.grad.domain.Mission;
-import com.server.grad.dto.CommentsResponseDto;
+import com.server.grad.dto.comment.CommentsResponseDto;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

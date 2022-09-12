@@ -1,6 +1,5 @@
 package com.server.grad.dto.family;
 
-
 import com.server.grad.domain.Family;
 import lombok.Getter;
 

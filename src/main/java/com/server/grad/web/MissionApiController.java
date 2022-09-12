@@ -1,17 +1,15 @@
 package com.server.grad.web;
 
 import com.server.grad.domain.Mission;
-import com.server.grad.dto.CommentsResponseDto;
+import com.server.grad.dto.comment.CommentsResponseDto;
 import com.server.grad.service.MissionService;
 import com.server.grad.dto.mission.MissionResponseDto;
 import com.server.grad.service.S3Service;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;

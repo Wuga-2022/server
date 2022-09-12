@@ -3,12 +3,6 @@ package com.server.grad.service;
 import com.server.grad.domain.Family;
 import com.server.grad.domain.FamilyRepository;
 
-import com.server.grad.domain.User;
-import com.server.grad.dto.FamilyResponseDto;
-import com.server.grad.dto.FamilyUpdateRequestDto;
-import com.server.grad.dto.user.UserResponseDto;
-import com.server.grad.dto.user.UserUpdateRequestDto;
-
 import com.server.grad.dto.family.FamilySaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
