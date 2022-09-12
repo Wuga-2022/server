@@ -1,6 +1,6 @@
 package com.server.grad.web;
 
-import com.server.grad.dto.CommentsResponseDto;
+import com.server.grad.dto.comments.CommentsResponseDto;
 import com.server.grad.service.MissionService;
 import com.server.grad.dto.MissionResponseDto;
 import io.swagger.annotations.Api;

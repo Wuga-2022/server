@@ -1,4 +1,4 @@
-package com.server.grad.dto;
+package com.server.grad.dto.comments;
 
 import com.server.grad.domain.Comments;
 import lombok.Getter;

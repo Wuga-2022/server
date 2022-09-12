@@ -1,6 +1,7 @@
 package com.server.grad.dto;
 
 import com.server.grad.domain.Mission;
+import com.server.grad.dto.comments.CommentsResponseDto;
 import lombok.Getter;
 
 import java.time.LocalDate;
