@@ -1,7 +1,9 @@
 package com.server.grad.service;
 
+import com.server.grad.domain.QuestionRepository;
 import com.server.grad.domain.User;
 import com.server.grad.domain.UserRepository;
+import com.server.grad.dto.answers.AnswersResponseDto;
 import com.server.grad.dto.user.UserResponseDto;
 import com.server.grad.dto.user.UserSaveRequestDto;
 import com.server.grad.dto.user.UserUpdateFamilyDto;
@@ -10,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service

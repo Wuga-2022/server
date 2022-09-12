@@ -1,9 +1,7 @@
 package com.server.grad.web;
 
-import com.server.grad.dto.CommentsResponseDto;
-import com.server.grad.dto.CommentsSaveRequestDto;
-import com.server.grad.dto.answers.AnswersResponseDto;
-import com.server.grad.dto.answers.AnswersSaveRequestDto;
+import com.server.grad.dto.comments.CommentsResponseDto;
+import com.server.grad.dto.comments.CommentsSaveRequestDto;
 import com.server.grad.service.CommentsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

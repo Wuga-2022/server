@@ -32,7 +32,6 @@ public class FamilyApiController {
     @ApiOperation(value = "가족 코드 입력", notes = "코드 입력한 유저의 가족 결정됨")
     public Long putFamilyCode(@LoginUser SessionUser user, @RequestParam String familycode) {
         return familyService.updateUserFamCode(user.getEmail(), familycode);
-
     }
 
 //    @GetMapping("/family/{id}")

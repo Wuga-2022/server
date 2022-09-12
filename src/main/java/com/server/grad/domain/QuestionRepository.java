@@ -8,6 +8,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface QuestionRepository extends JpaRepository<Question, Long> {
-    @Query("select a from Answers a where a.question_id = :q_id and a.user_id IN :users_id")
-    List<AnswersResponseDto> findAnswerByUserId(@Param("q_id") Long q_id, @Param("users_id") List<Long> users_id);
+    @Query("select a from Answers a where a.question_id.id = :q_id and a.user_id.id IN :users_id")
+    List<AnswersResponseDto> findAnswersByUserId(@Param("q_id") Long q_id, @Param("users_id") List<Long> users_id);
 }
