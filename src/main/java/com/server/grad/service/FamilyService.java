@@ -23,24 +23,19 @@ public class FamilyService {
     private final UserRepository userRepository;
     private final UserService userService;
 
-//    public FamilyResponseDto findById(Long id) {
-//        Family entity = familyRepository.findById(id)
-//                .orElseThrow(() -> new IllegalArgumentException("해당 가족 정보 없음 = " + id));
-//
-//        return new FamilyResponseDto(entity);
-//    }
-
+    //Session User 때문에 email -> u_id 변경함
     @Transactional
-    public Long updateUserFamCode(String email, String familycode){
+    public Long updateUserFamCode(Long u_id, String familycode){
         UserUpdateFamilyDto updateFamilyDto = new UserUpdateFamilyDto(familyRepository.findByFamilycode(familycode)
                 .orElseThrow(() -> new IllegalArgumentException("해당 가족이 존재하지 않습니다." + familycode))
         );
 
-        return userService.updateFamily(email, updateFamilyDto);
+        return userService.updateFamily(u_id, updateFamilyDto);
     }
 
+    //Session User 때문에 email -> u_id 변경함
     @Transactional
-    public String createCode(String email) {
+    public String createCode(Long u_id) {
         Random random = new Random();
         String generatedString;
         do {
@@ -55,8 +50,8 @@ public class FamilyService {
         // user db에 family id 넣기
         FamilySaveRequestDto requestDto = new FamilySaveRequestDto(generatedString);
 
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(()-> new IllegalArgumentException("유저가 존재하지 않습니다." + email));
+        User user = userRepository.findById(u_id)
+                .orElseThrow(()-> new IllegalArgumentException("유저가 존재하지 않습니다." + u_id));
 
         user.setFamily_id(familyRepository.save(requestDto.toEntity()));
         userRepository.save(user);
