@@ -16,15 +16,14 @@ import java.time.LocalDate;
 public class CommentsSaveRequestDto {
     private int emoji;
     private String comment;
-    private LocalDate date;
+    private LocalDate date = LocalDate.now();
     private Mission mission_id;
     private User user_id;
 
     @Builder
-    public CommentsSaveRequestDto(int emoji, String comment, LocalDate date, Mission mission_id, User user_id){
+    public CommentsSaveRequestDto(int emoji, String comment, Mission mission_id, User user_id){
         this.emoji = emoji;
         this.comment = comment;
-        this.date = date;
         this.mission_id = mission_id;
         this.user_id = user_id;
     }

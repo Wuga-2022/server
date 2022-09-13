@@ -43,4 +43,9 @@ public class Comments {
         this.mission_id = mission_id;
         this.user_id = user_id;
     }
+
+    public void update(String comment, LocalDate date){
+        this.comment = comment;
+        this.date = date;
+    }
 }

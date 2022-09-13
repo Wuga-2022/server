@@ -9,6 +9,7 @@ import org.hibernate.annotations.ColumnDefault;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+
 import java.util.stream.Collectors;
 
 @Getter
@@ -23,6 +24,7 @@ public class Family {
 
     @Column(nullable = false)
     private String familycode;
+
 
     // 1 : N user join
     @JsonIgnoreProperties({"family_id"})

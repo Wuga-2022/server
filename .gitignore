@@ -1,4 +1,6 @@
 # Project exclude paths
 /.gradle/
 /src/main/resources/application.properties
+/src/main/resources/application.yml
 application-oauth.properties
+

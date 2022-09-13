@@ -1,9 +1,8 @@
 package com.server.grad.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
@@ -12,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@Setter
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class Mission {
@@ -21,13 +22,12 @@ public class Mission {
     @Column(name = "mission_id")
     private Long id;
 
-    //타입 이미지로 바꾸기
     @Column(nullable = false)
     private String mission;
 
-    //타입 이미지로 바꾸기
-    @Column
-    private String fam_image;
+    @OneToMany(mappedBy = "mission", cascade = CascadeType.ALL)
+    @JsonBackReference
+    private List<Images> images = new ArrayList<>();
 
     @Column
     private LocalDate date;
@@ -44,12 +44,22 @@ public class Mission {
     private List<Comments> comments = new ArrayList<>();
 
     @Builder
-    public Mission(String mission, String fam_image, LocalDate date, int similarity, Boolean success, List<Comments> comments){
+    public Mission(String mission, LocalDate date, int similarity, Boolean success, List<Comments> comments){
         this.mission = mission;
-        this.fam_image = fam_image;
         this.date = date;
         this.similarity = similarity;
         this.success = success;
         this.comments = comments;
+    }
+
+    public static Mission createMission(String mission, LocalDate date, int similarity, Boolean success, List<Comments> comments){
+        Mission mission1 = new Mission();
+        mission1.setMission(mission);
+        mission1.setDate(date);
+        mission1.setSimilarity(similarity);
+        mission1.setSuccess(success);
+        mission1.setComments(comments);
+
+        return mission1;
     }
 }

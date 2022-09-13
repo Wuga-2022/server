@@ -4,6 +4,7 @@ import com.server.grad.domain.Question;
 import com.server.grad.dto.answers.AnswersResponseDto;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
