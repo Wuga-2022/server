@@ -1,7 +1,7 @@
 package com.server.grad.web;
 
 import com.server.grad.domain.Mission;
-import com.server.grad.dto.comment.CommentsResponseDto;
+import com.server.grad.dto.comments.CommentsResponseDto;
 import com.server.grad.service.MissionService;
 import com.server.grad.dto.mission.MissionResponseDto;
 import com.server.grad.service.S3Service;

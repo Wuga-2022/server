@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.apache.tomcat.jni.Local;
 import org.hibernate.mapping.Join;
 
 import javax.persistence.*;
@@ -46,5 +47,10 @@ public class Answers {
         this.date = date;
         this.question_id = question_id;
         this.user_id = user_id;
+    }
+
+    public void update(String answer, LocalDate date){
+        this.answer = answer;
+        this.date = date;
     }
 }

@@ -1,4 +1,4 @@
-package com.server.grad.dto.comment;
+package com.server.grad.dto.comments;
 
 import com.server.grad.domain.Comments;
 import com.server.grad.domain.Mission;

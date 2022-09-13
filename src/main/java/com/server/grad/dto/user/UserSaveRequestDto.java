@@ -1,5 +1,6 @@
 package com.server.grad.dto.user;
 
+import com.server.grad.domain.Role;
 import com.server.grad.domain.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,12 +11,14 @@ import lombok.NoArgsConstructor;
 public class UserSaveRequestDto {
     private String name;
     private String email;
-    private String role;
+    private String member;
+    private Role role;
 
     @Builder
-    public UserSaveRequestDto(String name, String email, String role){
+    public UserSaveRequestDto(String name, String email, String member, Role role){
         this.name = name;
         this.email = email;
+        this.member = member;
         this.role = role;
     }
 
@@ -24,6 +27,7 @@ public class UserSaveRequestDto {
         return User.builder()
                 .name(name)
                 .email(email)
+                .member(member)
                 .role(role)
                 .build();
     }

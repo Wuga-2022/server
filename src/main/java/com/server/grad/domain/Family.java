@@ -10,6 +10,8 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.stream.Collectors;
+
 @Getter
 @NoArgsConstructor
 @Entity
@@ -23,6 +25,8 @@ public class Family {
     @Column(nullable = false)
     private String familycode;
 
+
+    // 1 : N user join
     @JsonIgnoreProperties({"family_id"})
     @OneToMany(mappedBy = "family_id", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<User> users = new ArrayList<>();

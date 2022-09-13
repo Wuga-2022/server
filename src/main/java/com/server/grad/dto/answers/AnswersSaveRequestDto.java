@@ -7,8 +7,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.apache.tomcat.jni.Local;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 
 @Getter
 @Setter
@@ -16,15 +18,14 @@ import java.time.LocalDate;
 public class AnswersSaveRequestDto {
     private int emoji;
     private String answer;
-    private LocalDate date;
+    private LocalDate date = LocalDate.now();
     private Question question_id;
     private User user_id;
 
     @Builder
-    public AnswersSaveRequestDto(int emoji, String answer, LocalDate date, Question question_id, User user_id){
+    public AnswersSaveRequestDto(int emoji, String answer, Question question_id, User user_id){
         this.emoji = emoji;
         this.answer = answer;
-        this.date = date;
         this.question_id = question_id;
         this.user_id = user_id;
     }

@@ -1,9 +1,14 @@
 package com.server.grad.service;
 
 import com.server.grad.domain.*;
-import com.server.grad.dto.comment.CommentsResponseDto;
-import com.server.grad.dto.comment.CommentsSaveRequestDto;
-import com.server.grad.dto.comment.CommentsUpdateRequestDto;
+import com.server.grad.dto.comments.CommentsResponseDto;
+import com.server.grad.dto.comments.CommentsSaveRequestDto;
+import com.server.grad.dto.comments.CommentsUpdateRequestDto;
+
+import com.server.grad.domain.CommentsRepository;
+import com.server.grad.domain.Mission;
+import com.server.grad.domain.MissionRepository;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;

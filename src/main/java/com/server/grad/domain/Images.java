@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Image {
+public class Images {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "image_id")

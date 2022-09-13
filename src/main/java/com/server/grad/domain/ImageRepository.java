@@ -11,10 +11,10 @@ public class ImageRepository {
 
     private final EntityManager em;
 
-    public void save(Image image) {em.persist(image);}
+    public void save(Images image) {em.persist(image);}
 
     public void delete(String path) {
-        Image image = em.createQuery("select i from Images i where i.filePath = :path", Image.class)
+        Images image = em.createQuery("select i from Images i where i.filePath = :path", Images.class)
                 .setParameter("path", path)
                 .getSingleResult();
         em.remove(image);

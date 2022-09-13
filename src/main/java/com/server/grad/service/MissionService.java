@@ -1,7 +1,6 @@
 package com.server.grad.service;
 
 import com.server.grad.domain.*;
-import com.server.grad.dto.comment.CommentsResponseDto;
 import com.server.grad.dto.mission.MissionResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,7 +10,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 
 @Service
@@ -34,9 +32,9 @@ public class MissionService {
         Mission mission1 = Mission.createMission(mission, date, similarity, success, comments);
 
         if (!files.isEmpty()) {
-            List<Image> images = new ArrayList<>();
+            List<Images> images = new ArrayList<>();
             for (String file : files) {
-                Image imageFile = Image.builder()
+                Images imageFile = Images.builder()
                         .mission(mission1)
                         .filePath(file)
                         .build();
@@ -54,12 +52,12 @@ public class MissionService {
                 .mission(mission1.getMission())
                 .similarity(mission1.getSimilarity())
                 .success(mission1.getSuccess())
-                .comments(mission1.getComments().stream().map(CommentsResponseDto::new).collect(Collectors.toList()))
+                //.comments(mission1.getComments().stream().map(CommentsResponseDto::new).collect(Collectors.toList()))
                 .build();
 
-        List<Image> images = mission1.getImages();
+        List<Images> images = mission1.getImages();
         List<String> imageurls = new ArrayList<>();
-        for (Image img : images) {
+        for (Images img : images) {
             imageurls.add("https://" + S3Service.CLOUD_FRONT_DOMAIN_NAME + "/" + img.getFilePath());
         }
         singlemission.setImages(imageurls);
@@ -70,8 +68,8 @@ public class MissionService {
     public void deleteMission(Long id) {
         Mission mission = missionRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 미션 없음"));
-        List<Image> images = mission.getImages();
-        for (Image image : images) {
+        List<Images> images = mission.getImages();
+        for (Images image : images) {
             s3Service.deleteFile(image.getFilePath());
         }
         missionRepository.delete(mission);

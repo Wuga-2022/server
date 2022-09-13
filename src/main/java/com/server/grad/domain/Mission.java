@@ -27,7 +27,7 @@ public class Mission {
 
     @OneToMany(mappedBy = "mission", cascade = CascadeType.ALL)
     @JsonBackReference
-    private List<Image> images = new ArrayList<>();
+    private List<Images> images = new ArrayList<>();
 
     @Column
     private LocalDate date;
