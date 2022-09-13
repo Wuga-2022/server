@@ -29,7 +29,6 @@ public class Family {
     @OneToMany(mappedBy = "family_id", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<User> users = new ArrayList<>();
 
-
     @Builder
     public Family(String familycode){
         this.familycode = familycode;

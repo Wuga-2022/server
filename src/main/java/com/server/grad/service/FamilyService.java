@@ -1,19 +1,21 @@
 package com.server.grad.service;
 
-import com.server.grad.domain.Family;
 import com.server.grad.domain.FamilyRepository;
 import com.server.grad.domain.User;
 import com.server.grad.domain.UserRepository;
 
-import com.server.grad.dto.family.FamilyResponseDto;
-
 import com.server.grad.dto.family.FamilySaveRequestDto;
+import com.server.grad.dto.user.UserNameResponseDto;
+import com.server.grad.dto.user.UserResponseDto;
 import com.server.grad.dto.user.UserUpdateFamilyDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import springfox.documentation.swagger2.mappers.ModelMapper;
 
 import javax.transaction.Transactional;
-import java.util.Random;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +24,9 @@ public class FamilyService {
     private final FamilyRepository familyRepository;
     private final UserRepository userRepository;
     private final UserService userService;
+
+    @Autowired
+    ModelMapper modelMapper;
 
     //Session User 때문에 email -> u_id 변경함
     @Transactional
@@ -57,6 +62,12 @@ public class FamilyService {
         userRepository.save(user);
 
         return generatedString;
+    }
 
+    public List<UserNameResponseDto> getFamilyMembers(Long u_id){
+        User user = userRepository.findById(u_id)
+                .orElseThrow(()-> new IllegalArgumentException("유저가 존재하지 않습니다." + u_id));
+
+        return user.getFamily_id().getUsers().stream().map(UserNameResponseDto::new).collect(Collectors.toList());
     }
 }

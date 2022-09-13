@@ -1,8 +1,6 @@
 package com.server.grad.web;
 
-import com.server.grad.config.auth.LoginUser;
-import com.server.grad.config.auth.dto.SessionUser;
-
+import com.server.grad.dto.user.UserNameResponseDto;
 import com.server.grad.service.FamilyService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -12,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 
 @Api(value="Family Controller", tags = "")
@@ -46,5 +46,10 @@ public class FamilyApiController {
         return familyService.updateUserFamCode(u_id, familycode);
     }
 
+    @GetMapping("/family/{u_id}")
+    @ApiOperation(value = "유저의 가족 전체 반환", notes = "가족(이름, 역할)을 List로 반환")
+    public List<UserNameResponseDto> getFamilyMembers(@PathVariable Long u_id){
+        return familyService.getFamilyMembers(u_id);
+    }
 }
 
