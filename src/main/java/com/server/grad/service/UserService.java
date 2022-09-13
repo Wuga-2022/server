@@ -36,10 +36,22 @@ public class UserService {
         return user.getId();
    }
 
+   public Long login(String email, String password){
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("해당 유저 정보가 없습니다." + email));
+
+        if(user.getPassword().equals(password)){
+            return user.getId();
+        } else{
+            return 0L;
+        }
+   }
+
+    //Session User 때문에 email -> u_id 변경함
    @Transactional
-   public Long updateFamily(String email, UserUpdateFamilyDto requestDto){
-       User user = userRepository.findByEmail(email)
-               .orElseThrow(() -> new IllegalArgumentException("해당 유저 정보 없음 = " + email));
+   public Long updateFamily(Long u_id, UserUpdateFamilyDto requestDto){
+       User user = userRepository.findById(u_id)
+               .orElseThrow(() -> new IllegalArgumentException("해당 유저 정보 없음 = " + u_id));
 
        user.updateFamily(requestDto.getFamily_id());
 
