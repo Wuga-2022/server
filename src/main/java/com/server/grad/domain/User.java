@@ -26,6 +26,9 @@ public class User {
     @Column(nullable = false)
     private String email;
 
+    @Column(nullable = false)
+    private String password;
+
     @Column
     private String member;
 
@@ -47,11 +50,12 @@ public class User {
 //    private ?? 프로필 사진
 
     @Builder
-    public User(String name, String email, String member, Role role, Family family_id){
+    public User(String name, String email, String member, String password, Role role, Family family_id){
         this.name = name;
         this.email = email;
         this.member = member;
         this.role = role;
+        this.password = password;
         this.family_id = family_id;
     }
 

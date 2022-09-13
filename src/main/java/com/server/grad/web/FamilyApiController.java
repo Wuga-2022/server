@@ -47,7 +47,7 @@ public class FamilyApiController {
     }
 
     @GetMapping("/family/{u_id}")
-    @ApiOperation(value = "유저의 가족 전체 반환", notes = "가족을 List로 반환")
+    @ApiOperation(value = "유저의 가족 전체 반환", notes = "가족(이름, 역할)을 List로 반환")
     public List<UserNameResponseDto> getFamilyMembers(@PathVariable Long u_id){
         return familyService.getFamilyMembers(u_id);
     }
