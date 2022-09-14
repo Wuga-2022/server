@@ -22,7 +22,7 @@ public class FamilyApiController {
 
     private final FamilyService familyService;
 
-//    @GetMapping("/familycode/{")
+//    @GetMapping("/familycode/")
 //    @ApiOperation(value = "가족 코드 생성", notes = "코드 생성한 유저의 가족 결정됨")
 //    public String getFamilyCode(@LoginUser SessionUser user){
 //        return familyService.createCode(user.getEmail());

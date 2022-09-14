@@ -2,9 +2,7 @@ package com.server.grad.web;
 
 import com.server.grad.config.auth.LoginUser;
 import com.server.grad.config.auth.dto.SessionUser;
-import com.server.grad.dto.user.UserResponseDto;
-import com.server.grad.dto.user.UserSaveRequestDto;
-import com.server.grad.dto.user.UserUpdateRequestDto;
+import com.server.grad.dto.user.*;
 import com.server.grad.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -28,19 +26,31 @@ public class UserApiController {
 
     @GetMapping("/login")
     @ApiOperation(value = "로그인", notes = "이메일&비밀번호 맞으면 유저 아이디 반환. 틀리면 0(Long) 반환")
-    public Long login(@RequestParam String email, @RequestParam String password){
+    public UserLoginResponseDto login(@RequestParam String email, @RequestParam String password){
         return userService.login(email, password);
     }
 
-    @PutMapping("/user")
+//    @PutMapping("/user")
+//    @ApiOperation(value = "유저 정보 수정", notes = "")
+//    public Long update(@LoginUser SessionUser user, @RequestBody UserUpdateRequestDto requestDto) {
+//        return userService.update(user.getEmail(), requestDto);
+//    }
+//
+//    @GetMapping("/user")
+//    @ApiOperation(value = "유저 정보 반환", notes = "")
+//    public UserResponseDto findById(@LoginUser SessionUser user) {
+//        return userService.findById(user.getId());
+//    }
+
+    @PutMapping("/user/{u_id}")
     @ApiOperation(value = "유저 정보 수정", notes = "")
-    public Long update(@LoginUser SessionUser user, @RequestBody UserUpdateRequestDto requestDto) {
-        return userService.update(user.getEmail(), requestDto);
+    public Long update(@PathVariable Long u_id, @RequestBody UserUpdateRequestDto requestDto) {
+        return userService.update(u_id, requestDto);
     }
 
-    @GetMapping("/user")
+    @GetMapping("/user/{u_id}")
     @ApiOperation(value = "유저 정보 반환", notes = "")
-    public UserResponseDto findById(@LoginUser SessionUser user) {
-        return userService.findById(user.getId());
+    public UserResponseDto findById(@PathVariable Long u_id) {
+        return userService.findById(u_id);
     }
 }

@@ -17,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -50,5 +51,10 @@ public class QuestionApiController {
     public List<AnswersResponseDto> read(@PathVariable Long q_id, @PathVariable Long u_id){
 
         return answersService.findUsersIdAnswer(q_id, u_id);
+    }
+
+    @PutMapping("/question/complete/{q_id}")
+    public void update(@PathVariable Long q_id){
+
     }
 }
