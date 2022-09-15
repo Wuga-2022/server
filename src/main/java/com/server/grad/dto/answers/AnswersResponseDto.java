@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Getter
 public class AnswersResponseDto {
     private Long id;
-    private int emoji;
+    private String emoji;
     private String answer;
     private LocalDate date;
 

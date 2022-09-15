@@ -16,14 +16,14 @@ import java.time.ZoneId;
 @Setter
 @NoArgsConstructor
 public class AnswersSaveRequestDto {
-    private int emoji;
+    private String emoji;
     private String answer;
     private LocalDate date = LocalDate.now();
     private Question question_id;
     private User user_id;
 
     @Builder
-    public AnswersSaveRequestDto(int emoji, String answer, Question question_id, User user_id){
+    public AnswersSaveRequestDto(String emoji, String answer, Question question_id, User user_id){
         this.emoji = emoji;
         this.answer = answer;
         this.question_id = question_id;
