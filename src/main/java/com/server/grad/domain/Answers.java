@@ -7,10 +7,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.apache.tomcat.jni.Local;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.mapping.Join;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -22,7 +24,8 @@ public class Answers {
     private Long id;
 
     @Column
-    private int emoji;
+    @ColumnDefault("0,0,0")
+    private String emoji;
 
     @Column
     private String answer;
@@ -41,7 +44,7 @@ public class Answers {
     private User user_id;
 
     @Builder
-    public Answers(int emoji, String answer, LocalDate date, Question question_id, User user_id){
+    public Answers(String emoji, String answer, LocalDate date, Question question_id, User user_id){
         this.emoji = emoji;
         this.answer = answer;
         this.date = date;

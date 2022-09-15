@@ -24,7 +24,7 @@ public class UserService {
         User user = userRepository.findById(u_id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 유저 정보가 없습니다." + u_id));
 
-        user.update(requestDto.getName(), requestDto.getMember());
+        user.update(requestDto.getName(), requestDto.getMember(), requestDto.getProfile_img());
         return user.getId();
    }
 
