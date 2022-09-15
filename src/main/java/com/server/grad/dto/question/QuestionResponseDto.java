@@ -1,4 +1,4 @@
-package com.server.grad.dto;
+package com.server.grad.dto.question;
 
 import com.server.grad.domain.Question;
 import com.server.grad.dto.answers.AnswersResponseDto;

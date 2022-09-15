@@ -1,16 +1,9 @@
 package com.server.grad.web;
 
-import com.server.grad.config.auth.LoginUser;
-import com.server.grad.config.auth.dto.SessionUser;
-import com.server.grad.domain.AnswersRepository;
-import com.server.grad.domain.QuestionRepository;
-import com.server.grad.domain.User;
 import com.server.grad.dto.answers.AnswersResponseDto;
-import com.server.grad.dto.user.UserResponseDto;
 import com.server.grad.service.AnswersService;
 import com.server.grad.service.QuestionService;
-import com.server.grad.dto.QuestionResponseDto;
-import com.server.grad.service.UserService;
+import com.server.grad.dto.question.QuestionResponseDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +14,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Api(value="Question Controller", tags = "")
 @RestController

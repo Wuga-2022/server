@@ -9,11 +9,13 @@ public class UserLoginResponseDto {
     private String email;
     private String name;
     private String member;
+    private String profile_img;
 
     public UserLoginResponseDto(User entity){
         this.id = entity.getId();
         this.email = entity.getEmail();
         this.name = entity.getName();
         this.member = entity.getMember();
+        this.profile_img = entity.getProfile_img();
     }
 }
