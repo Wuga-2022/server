@@ -35,10 +35,10 @@ public class S3Service {
     public static final String CLOUD_FRONT_DOMAIN_NAME = "d1hop3qdderj3r.cloudfront.net"; //CloudFront 도메인명 (조회 시 사용)
 
 
-    @Value("${cloud.aws.credentials.accessKey}")
+    @Value("${cloud.aws.credentials.access-key}")
     private String accessKey;
 
-    @Value("${cloud.aws.credentials.secretKey}")
+    @Value("${cloud.aws.credentials.secret-key}")
     private String secretKey;
 
     @Value("${cloud.aws.s3.bucket}")

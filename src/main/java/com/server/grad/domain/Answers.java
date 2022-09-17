@@ -24,8 +24,7 @@ public class Answers {
     private Long id;
 
     @Column
-    @ColumnDefault("0,0,0")
-    private String emoji;
+    private String emoji = "0,0,0";
 
     @Column
     private String answer;
