@@ -28,28 +28,26 @@ public class MissionApiController {
     private final MissionService missionService;
     private final S3Service s3Service;
 
-    @PostMapping(value = "/mission", consumes = {"multipart/form-data"})
+    @PostMapping(value = "/mission/{id}", consumes = {"multipart/form-data"})
     @ApiOperation(value = "미션 등록")
-    public MissionResponseDto create(@RequestPart(value="mission") Map<Object, String> mission,
-                          @RequestPart(value = "images", required = false) List<MultipartFile> images) throws IOException {
-        System.out.println("mission = " + mission);
+    public MissionResponseDto createMission(@RequestPart(value="mission") Map<Object, String> mission,
+                                     @RequestPart(value = "mission_images", required = false) List<MultipartFile> images) throws IOException {
         List<String> imageList = new ArrayList<>();
         if (images != null) {
             imageList = s3Service.upload(images);
         }
-        return missionService.upload(mission, imageList);
+        return missionService.create(mission, imageList);
     }
-    @GetMapping("/file/download/{fileName}")
-    @ApiOperation(value = "S3의 파일 다운로드")
-    public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable String fileName){
-        byte[] data = s3Service.downloadFile(fileName);
-        ByteArrayResource resource = new ByteArrayResource(data);
-        return  ResponseEntity
-                .ok()
-                .contentLength(data.length)
-                .header("Content-type", "application/octet-stream")
-                .header("Content-disposition", "attachment; filename=\"" + fileName + "\"")
-                .body(resource);
+
+    @PutMapping(value = "/mission/{id}", consumes = {"multipart/form-data"})
+    @ApiOperation(value = "사진 등록")
+    public MissionResponseDto uploadMission(@PathVariable Long id, @RequestPart(value="mission") Map<Object, String> mission,
+                          @RequestPart(value = "images", required = false) List<MultipartFile> images) throws IOException {
+        List<String> imageList = new ArrayList<>();
+        if (images != null) {
+            imageList = s3Service.upload(images);
+        }
+        return missionService.upload(id, mission, imageList);
     }
 
     @GetMapping("/missions")
