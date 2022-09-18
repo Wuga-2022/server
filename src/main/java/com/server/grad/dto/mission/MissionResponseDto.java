@@ -1,7 +1,9 @@
 package com.server.grad.dto.mission;
 
 import com.server.grad.domain.Mission;
+import com.server.grad.domain.Missions;
 import com.server.grad.dto.comments.CommentsResponseDto;
+import com.server.grad.service.S3Service;
 import lombok.*;
 
 import lombok.Getter;
@@ -16,8 +18,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class MissionResponseDto {
     private Long id;
-    private List<String> mission;
-    private List<String> images;
+    private String mission;
+    private String image;
     private LocalDate date;
     private int similarity;
     private Boolean success;
@@ -25,8 +27,8 @@ public class MissionResponseDto {
 
     public MissionResponseDto(Mission entity){
         this.id = entity.getId();
-        this.mission = entity.getMission().stream().map(String::valueOf).collect(Collectors.toList());
-        this.images = entity.getImages().stream().map(String::valueOf).collect(Collectors.toList());
+        this.mission = "https://" + S3Service.CLOUD_FRONT_DOMAIN_NAME + "/" + entity.getMissions().getFilePath();
+        this.image = "https://" + S3Service.CLOUD_FRONT_DOMAIN_NAME + "/" + entity.getImages().getFilePath();
         this.date = entity.getDate();
         this.similarity = entity.getSimilarity();
         this.success = entity.getSuccess();

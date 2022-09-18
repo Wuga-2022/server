@@ -44,7 +44,7 @@ public class MissionService {
                 missionsRepository.save(imageFile);
                 images.add(imageFile);
             }
-            mission1.setMission(images);
+            mission1.setMissions(images.get(0));
         }
 
         missionRepository.save(mission1);
@@ -57,12 +57,10 @@ public class MissionService {
                 //.comments(mission1.getComments().stream().map(CommentsResponseDto::new).collect(Collectors.toList()))
                 .build();
 
-        List<Missions> images = mission1.getMission();
+        Missions img = mission1.getMissions();
         List<String> imageurls = new ArrayList<>();
-        for (Missions img : images) {
-            imageurls.add("https://" + S3Service.CLOUD_FRONT_DOMAIN_NAME + "/" + img.getFilePath());
-        }
-        singlemission.setImages(imageurls);
+        imageurls.add("https://" + S3Service.CLOUD_FRONT_DOMAIN_NAME + "/" + img.getFilePath());
+        singlemission.setMission(imageurls.get(0));
 
         return singlemission;
     }
@@ -88,7 +86,7 @@ public class MissionService {
                 imageRepository.save(imageFile);
                 images.add(imageFile);
             }
-            mission.setImages(images);
+            mission.setImages(images.get(0));
         }
 
         missionRepository.save(mission);
@@ -101,12 +99,10 @@ public class MissionService {
                 //.comments(mission1.getComments().stream().map(CommentsResponseDto::new).collect(Collectors.toList()))
                 .build();
 
-        List<Images> images = mission.getImages();
+        Images img = mission.getImages();
         List<String> imageurls = new ArrayList<>();
-        for (Images img : images) {
-            imageurls.add("https://" + S3Service.CLOUD_FRONT_DOMAIN_NAME + "/" + img.getFilePath());
-        }
-        singlemission.setImages(imageurls);
+        imageurls.add("https://" + S3Service.CLOUD_FRONT_DOMAIN_NAME + "/" + img.getFilePath());
+        singlemission.setImage(imageurls.get(0));
 
         return singlemission;
     }
@@ -114,10 +110,8 @@ public class MissionService {
     public void deleteMission(Long id) {
         Mission mission = missionRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 미션 없음"));
-        List<Images> images = mission.getImages();
-        for (Images image : images) {
-            s3Service.deleteFile(image.getFilePath());
-        }
+        Images images = mission.getImages();
+        s3Service.deleteFile(images.getFilePath());
         missionRepository.delete(mission);
     }
 
@@ -128,8 +122,8 @@ public class MissionService {
         for (Mission mission : am){
             MissionResponseDto dto = MissionResponseDto.builder()
                     .id(mission.getId())
-                    .mission(mission.getMission().stream().map(String::valueOf).collect(Collectors.toList()))
-                    .images(mission.getImages().stream().map(String::valueOf).collect(Collectors.toList()))
+                    .mission("https://" + S3Service.CLOUD_FRONT_DOMAIN_NAME + "/" + mission.getImages().getFilePath())
+                    .image("https://" + S3Service.CLOUD_FRONT_DOMAIN_NAME + "/" + mission.getImages().getFilePath())
                     .date(mission.getDate())
                     .similarity(mission.getSimilarity())
                     .success(mission.getSuccess())

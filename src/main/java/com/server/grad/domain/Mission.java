@@ -22,13 +22,13 @@ public class Mission {
     @Column(name = "mission_id")
     private Long id;
 
-    @OneToMany(mappedBy = "mission", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "mission", cascade = CascadeType.ALL)
     @JsonBackReference
-    private List<Missions> mission = new ArrayList<>();
+    private Missions missions;
 
-    @OneToMany(mappedBy = "mission", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "mission", cascade = CascadeType.ALL)
     @JsonBackReference
-    private List<Images> images = new ArrayList<>();
+    private Images images;
 
     @Column
     private LocalDate date;
