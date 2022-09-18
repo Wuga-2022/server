@@ -24,10 +24,10 @@ public class QuestionApiController {
     private final QuestionService questionService;
     private final AnswersService answersService;
 
-    @GetMapping("/question/{q_id}")
+    @GetMapping("/question")
     @ApiOperation(value = "질문 반환", notes = "질문 id에 맞게 반환")
-    public QuestionResponseDto findById(@PathVariable Long q_id){
-        return questionService.findById(q_id);
+    public QuestionResponseDto findByDate(){
+        return questionService.findByDate();
     }
 
 //    세션 유저 사용하는 경우(user_id 받지 X)
