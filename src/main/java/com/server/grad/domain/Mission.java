@@ -22,8 +22,9 @@ public class Mission {
     @Column(name = "mission_id")
     private Long id;
 
-    @Column(nullable = false)
-    private String mission;
+    @OneToMany(mappedBy = "mission", cascade = CascadeType.ALL)
+    @JsonBackReference
+    private List<Missions> mission = new ArrayList<>();
 
     @OneToMany(mappedBy = "mission", cascade = CascadeType.ALL)
     @JsonBackReference
@@ -44,22 +45,27 @@ public class Mission {
     private List<Comments> comments = new ArrayList<>();
 
     @Builder
-    public Mission(String mission, LocalDate date, int similarity, Boolean success, List<Comments> comments){
-        this.mission = mission;
+    public Mission(LocalDate date, int similarity, Boolean success, List<Comments> comments){
         this.date = date;
         this.similarity = similarity;
         this.success = success;
         this.comments = comments;
     }
 
-    public static Mission createMission(String mission, LocalDate date, int similarity, Boolean success, List<Comments> comments){
+    public static Mission createMission(LocalDate date, int similarity, Boolean success, List<Comments> comments){
         Mission mission1 = new Mission();
-        mission1.setMission(mission);
         mission1.setDate(date);
         mission1.setSimilarity(similarity);
         mission1.setSuccess(success);
         mission1.setComments(comments);
 
         return mission1;
+    }
+
+    public void update(LocalDate date, int similarity, Boolean success, List<Comments> comments){
+        this.date = date;
+        this.similarity = similarity;
+        this.success = success;
+        this.comments = comments;
     }
 }

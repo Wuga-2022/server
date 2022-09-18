@@ -23,25 +23,26 @@ public class MissionService {
 
     private final ImageRepository imageRepository;
 
-    public MissionResponseDto upload(Map<Object, String> missionInfo, List<String> files) {
-        String mission = missionInfo.get("mission");
+    private final MissionsRepository missionsRepository;
+
+    public MissionResponseDto create(Map<Object, String> missionInfo, List<String> files) {
         LocalDate date = LocalDate.parse(missionInfo.get("date"));
         int similarity = Integer.parseInt(missionInfo.get("similarity"));
         Boolean success = Boolean.parseBoolean(missionInfo.get("success"));
         List<Comments> comments = null;
-        Mission mission1 = Mission.createMission(mission, date, similarity, success, comments);
+        Mission mission1 = Mission.createMission(date, similarity, success, comments);
 
         if (!files.isEmpty()) {
-            List<Images> images = new ArrayList<>();
+            List<Missions> images = new ArrayList<>();
             for (String file : files) {
-                Images imageFile = Images.builder()
+                Missions imageFile = Missions.builder()
                         .mission(mission1)
                         .filePath(file)
                         .build();
-                imageRepository.save(imageFile);
+                missionsRepository.save(imageFile);
                 images.add(imageFile);
             }
-            mission1.setImages(images);
+            mission1.setMission(images);
         }
 
         missionRepository.save(mission1);
@@ -49,13 +50,56 @@ public class MissionService {
         MissionResponseDto singlemission = MissionResponseDto.builder()
                 .id(mission1.getId())
                 .date(mission1.getDate())
-                .mission(mission1.getMission())
                 .similarity(mission1.getSimilarity())
                 .success(mission1.getSuccess())
                 //.comments(mission1.getComments().stream().map(CommentsResponseDto::new).collect(Collectors.toList()))
                 .build();
 
-        List<Images> images = mission1.getImages();
+        List<Missions> images = mission1.getMission();
+        List<String> imageurls = new ArrayList<>();
+        for (Missions img : images) {
+            imageurls.add("https://" + S3Service.CLOUD_FRONT_DOMAIN_NAME + "/" + img.getFilePath());
+        }
+        singlemission.setImages(imageurls);
+
+        return singlemission;
+    }
+
+    public MissionResponseDto upload(Long id, Map<Object, String> missionInfo, List<String> files) {
+        Mission mission = missionRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 미션 없음"));
+
+        LocalDate date = LocalDate.parse(missionInfo.get("date"));
+        int similarity = Integer.parseInt(missionInfo.get("similarity"));
+        Boolean success = Boolean.parseBoolean(missionInfo.get("success"));
+        List<Comments> comments = null;
+
+        mission.update(date, similarity, success, comments);
+
+        if (!files.isEmpty()) {
+            List<Images> images = new ArrayList<>();
+            for (String file : files) {
+                Images imageFile = Images.builder()
+                        .mission(mission)
+                        .filePath(file)
+                        .build();
+                imageRepository.save(imageFile);
+                images.add(imageFile);
+            }
+            mission.setImages(images);
+        }
+
+        missionRepository.save(mission);
+
+        MissionResponseDto singlemission = MissionResponseDto.builder()
+                .id(mission.getId())
+                .date(mission.getDate())
+                .similarity(mission.getSimilarity())
+                .success(mission.getSuccess())
+                //.comments(mission1.getComments().stream().map(CommentsResponseDto::new).collect(Collectors.toList()))
+                .build();
+
+        List<Images> images = mission.getImages();
         List<String> imageurls = new ArrayList<>();
         for (Images img : images) {
             imageurls.add("https://" + S3Service.CLOUD_FRONT_DOMAIN_NAME + "/" + img.getFilePath());

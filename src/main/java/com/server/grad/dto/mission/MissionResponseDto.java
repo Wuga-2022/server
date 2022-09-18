@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class MissionResponseDto {
     private Long id;
-    private String mission;
+    private List<String> mission;
     private List<String> images;
     private LocalDate date;
     private int similarity;
@@ -25,7 +25,7 @@ public class MissionResponseDto {
 
     public MissionResponseDto(Mission entity){
         this.id = entity.getId();
-        this.mission = entity.getMission();
+        this.mission = entity.getImages().stream().map(String::valueOf).collect(Collectors.toList());
         this.images = entity.getImages().stream().map(String::valueOf).collect(Collectors.toList());
         this.date = entity.getDate();
         this.similarity = entity.getSimilarity();
