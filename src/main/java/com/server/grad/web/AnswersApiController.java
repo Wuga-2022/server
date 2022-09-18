@@ -38,4 +38,6 @@ public class AnswersApiController {
     public Long update(@PathVariable Long q_id, @PathVariable Long u_id, @RequestBody AnswersUpdateRequestDto requestDto){
         return answersService.update(q_id, u_id, requestDto);
     }
+
+    //emoji api
 }

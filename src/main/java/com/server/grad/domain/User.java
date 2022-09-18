@@ -32,6 +32,9 @@ public class User {
     @Column
     private String member;
 
+    @Column
+    private String profile_img;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
@@ -46,22 +49,21 @@ public class User {
     @OneToMany(mappedBy = "user_id", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<Answers> answers = new ArrayList<>();
 
-//    @Column
-//    private ?? 프로필 사진
-
     @Builder
-    public User(String name, String email, String member, String password, Role role, Family family_id){
+    public User(String name, String email, String member, String password, String profile_img,Role role, Family family_id){
         this.name = name;
         this.email = email;
         this.member = member;
-        this.role = role;
         this.password = password;
+        this.profile_img = profile_img;
+        this.role = role;
         this.family_id = family_id;
     }
 
-    public void update(String name, String member){
+    public void update(String name, String member, String profile_img){
         this.name = name;
         this.member = member;
+        this.profile_img = profile_img;
     }
 
     public User updateSocial(String name){
