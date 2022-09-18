@@ -52,7 +52,7 @@ public class MissionApiController {
 
     @GetMapping("/missions")
     @ApiOperation(value = "모든 미션 반환")
-    public List<Mission> getAll(){
+    public List<MissionResponseDto> getAll(){
         return missionService.getAll();
     }
 
