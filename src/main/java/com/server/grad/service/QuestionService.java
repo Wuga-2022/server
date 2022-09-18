@@ -19,4 +19,11 @@ public class QuestionService {
         return new QuestionResponseDto(entity);
     }
 
+    public QuestionResponseDto findByDate(){
+        Question entity = questionRepository.findByDate()
+                .orElseThrow(() -> new IllegalArgumentException("해당 문제 없음(생성 필요)"));
+
+        return new QuestionResponseDto(entity);
+    }
+
 }
