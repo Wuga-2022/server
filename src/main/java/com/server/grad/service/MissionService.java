@@ -1,6 +1,7 @@
 package com.server.grad.service;
 
 import com.server.grad.domain.*;
+import com.server.grad.dto.comments.CommentsResponseDto;
 import com.server.grad.dto.mission.MissionResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -120,8 +122,22 @@ public class MissionService {
     }
 
     @Transactional
-    public List<Mission> getAll(){
-        return missionRepository.findAll();
+    public List<MissionResponseDto> getAll(){
+        List<Mission> am = missionRepository.findAll();
+        List<MissionResponseDto> mr = new ArrayList<>();
+        for (Mission mission : am){
+            MissionResponseDto dto = MissionResponseDto.builder()
+                    .id(mission.getId())
+                    .mission(mission.getMission().stream().map(String::valueOf).collect(Collectors.toList()))
+                    .images(mission.getImages().stream().map(String::valueOf).collect(Collectors.toList()))
+                    .date(mission.getDate())
+                    .similarity(mission.getSimilarity())
+                    .success(mission.getSuccess())
+                    .comments(mission.getComments().stream().map(CommentsResponseDto::new).collect(Collectors.toList()))
+                    .build();
+            mr.add(dto);
+        }
+        return mr;
     }
 
     public MissionResponseDto findById(Long id) {
