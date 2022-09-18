@@ -17,7 +17,7 @@ public class Missions {
     @Column(name = "missionImage_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference
     @JoinColumn(name = "mission_id", nullable = false)
     private Mission mission;
