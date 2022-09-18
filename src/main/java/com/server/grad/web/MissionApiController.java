@@ -28,7 +28,7 @@ public class MissionApiController {
     private final MissionService missionService;
     private final S3Service s3Service;
 
-    @PostMapping(value = "/mission/{id}", consumes = {"multipart/form-data"})
+    @PostMapping(value = "/mission", consumes = {"multipart/form-data"})
     @ApiOperation(value = "미션 등록")
     public MissionResponseDto createMission(@RequestPart(value="mission") Map<Object, String> mission,
                                      @RequestPart(value = "mission_images", required = false) List<MultipartFile> images) throws IOException {
