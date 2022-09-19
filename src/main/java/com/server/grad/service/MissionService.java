@@ -54,7 +54,6 @@ public class MissionService {
                 .date(mission1.getDate())
                 .similarity(mission1.getSimilarity())
                 .success(mission1.getSuccess())
-                //.comments(mission1.getComments().stream().map(CommentsResponseDto::new).collect(Collectors.toList()))
                 .build();
 
         Missions img = mission1.getMissions();
@@ -120,16 +119,18 @@ public class MissionService {
         List<Mission> am = missionRepository.findAll();
         List<MissionResponseDto> mr = new ArrayList<>();
         for (Mission mission : am){
-            MissionResponseDto dto = MissionResponseDto.builder()
-                    .id(mission.getId())
-                    .mission("https://" + S3Service.CLOUD_FRONT_DOMAIN_NAME + "/" + mission.getImages().getFilePath())
-                    .image("https://" + S3Service.CLOUD_FRONT_DOMAIN_NAME + "/" + mission.getImages().getFilePath())
-                    .date(mission.getDate())
-                    .similarity(mission.getSimilarity())
-                    .success(mission.getSuccess())
-                    .comments(mission.getComments().stream().map(CommentsResponseDto::new).collect(Collectors.toList()))
-                    .build();
-            mr.add(dto);
+            if(mission.getImages()!=null){
+                MissionResponseDto dto = MissionResponseDto.builder()
+                        .id(mission.getId())
+                        .mission("https://" + S3Service.CLOUD_FRONT_DOMAIN_NAME + "/" + mission.getMissions().getFilePath())
+                        .image("https://" + S3Service.CLOUD_FRONT_DOMAIN_NAME + "/" + mission.getImages().getFilePath())
+                        .date(mission.getDate())
+                        .similarity(mission.getSimilarity())
+                        .success(mission.getSuccess())
+                        .comments(mission.getComments().stream().map(CommentsResponseDto::new).collect(Collectors.toList()))
+                        .build();
+                mr.add(dto);
+            }
         }
         return mr;
     }
@@ -139,6 +140,7 @@ public class MissionService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 미션 없음(생성 필요)"));
 
         return new MissionResponseDto(entity);
+
     }
 
 }
