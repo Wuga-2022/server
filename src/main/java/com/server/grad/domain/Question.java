@@ -1,6 +1,7 @@
 package com.server.grad.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,5 +43,9 @@ public class Question {
         this.date = date;
         this.complete = complete;
         this.answers = answers;
+    }
+
+    public void updateCompletion(Boolean complete){
+        this.complete = complete;
     }
 }

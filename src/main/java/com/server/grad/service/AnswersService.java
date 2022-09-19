@@ -1,9 +1,11 @@
 package com.server.grad.service;
 
 import com.server.grad.domain.*;
+import com.server.grad.dto.answers.AnswersEmojiUpdateReqDto;
 import com.server.grad.dto.answers.AnswersResponseDto;
 import com.server.grad.dto.answers.AnswersSaveRequestDto;
 import com.server.grad.dto.answers.AnswersUpdateRequestDto;
+import io.swagger.models.auth.In;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,5 +60,16 @@ public class AnswersService {
         answers.update(requestDto.getAnswer(), requestDto.getDate());
 
         return answers.getId();
+    }
+
+    @Transactional
+    public AnswersResponseDto updateEmoji(Long q_id, AnswersEmojiUpdateReqDto requestDto){
+        User user = userRepository.findByName(requestDto.getUser_name())
+                .orElseThrow(() -> new IllegalArgumentException("해당 유저 정보가 없습니다."));
+
+        Answers answers = answersRepository.findAnswersByWriterEntity(q_id, user.getId());
+        answers.updateEmoji(requestDto.getEmoji());
+
+        return new AnswersResponseDto(answers);
     }
 }

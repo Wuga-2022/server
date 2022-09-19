@@ -14,11 +14,13 @@ public class AnswersResponseDto {
     private String emoji;
     private String answer;
     private LocalDate date;
+    private String user_name;
 
     public AnswersResponseDto(Answers entity){
         this.id = entity.getId();
         this.emoji = entity.getEmoji();
         this.answer = entity.getAnswer();
         this.date = entity.getDate();
+        this.user_name = entity.getUser_id().getName();
     }
 }

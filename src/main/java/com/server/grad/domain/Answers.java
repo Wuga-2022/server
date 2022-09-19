@@ -55,4 +55,8 @@ public class Answers {
         this.answer = answer;
         this.date = date;
     }
+
+    public String updateEmoji(String emoji){
+        return this.emoji = emoji;
+    }
 }
