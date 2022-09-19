@@ -54,7 +54,6 @@ public class MissionService {
                 .date(mission1.getDate())
                 .similarity(mission1.getSimilarity())
                 .success(mission1.getSuccess())
-                //.comments(mission1.getComments().stream().map(CommentsResponseDto::new).collect(Collectors.toList()))
                 .build();
 
         Missions img = mission1.getMissions();
@@ -141,6 +140,7 @@ public class MissionService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 미션 없음(생성 필요)"));
 
         return new MissionResponseDto(entity);
+
     }
 
 }
