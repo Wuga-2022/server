@@ -1,5 +1,6 @@
 package com.server.grad.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,7 @@ public class Comments {
     private Long id;
 
     @Column
-    private  int emoji;
+    private  String emoji = "0,0,0";
 
     @Column
     private String comment;
@@ -36,7 +37,7 @@ public class Comments {
     private User user_id;
 
     @Builder
-    public Comments(int emoji, String comment, LocalDate date, Mission mission_id, User user_id){
+    public Comments(String emoji, String comment, LocalDate date, Mission mission_id, User user_id){
         this.emoji = emoji;
         this.comment = comment;
         this.date = date;
@@ -47,5 +48,9 @@ public class Comments {
     public void update(String comment, LocalDate date){
         this.comment = comment;
         this.date = date;
+    }
+
+    public String updateEmoji(String emoji){
+        return this.emoji = emoji;
     }
 }
