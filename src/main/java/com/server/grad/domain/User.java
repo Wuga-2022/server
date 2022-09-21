@@ -1,13 +1,19 @@
 package com.server.grad.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -44,10 +50,15 @@ public class User {
     @JoinColumn(name = "family_id")
     private Family family_id;
 
+
     // 1 : N answer join
     @JsonIgnoreProperties({"user_id"})
-    @OneToMany(mappedBy = "user_id", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    private List<Answers> answers = new ArrayList<>();
+    @OneToMany(mappedBy = "user_id", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    private Set<Answers> answers = new HashSet<>();
+
+    @JsonIgnoreProperties({"user_id"})
+    @OneToMany(mappedBy = "user_id", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    private Set<Comments> comments = new HashSet<>();
 
     @Builder
     public User(String name, String email, String member, String password, String profile_img,Role role, Family family_id){

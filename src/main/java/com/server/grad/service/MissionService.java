@@ -1,7 +1,6 @@
 package com.server.grad.service;
 
 import com.server.grad.domain.*;
-import com.server.grad.dto.comments.CommentsResponseDto;
 import com.server.grad.dto.mission.MissionResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,8 +10,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-
 
 @Service
 @RequiredArgsConstructor
@@ -95,7 +92,6 @@ public class MissionService {
                 .date(mission.getDate())
                 .similarity(mission.getSimilarity())
                 .success(mission.getSuccess())
-                //.comments(mission1.getComments().stream().map(CommentsResponseDto::new).collect(Collectors.toList()))
                 .build();
 
         Images img = mission.getImages();
@@ -127,7 +123,6 @@ public class MissionService {
                         .date(mission.getDate())
                         .similarity(mission.getSimilarity())
                         .success(mission.getSuccess())
-                        .comments(mission.getComments().stream().map(CommentsResponseDto::new).collect(Collectors.toList()))
                         .build();
                 mr.add(dto);
             }

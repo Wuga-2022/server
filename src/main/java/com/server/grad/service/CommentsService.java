@@ -1,6 +1,7 @@
 package com.server.grad.service;
 
 import com.server.grad.domain.*;
+import com.server.grad.dto.comments.CommentsEmojiUpdateReqDto;
 import com.server.grad.dto.comments.CommentsResponseDto;
 import com.server.grad.dto.comments.CommentsSaveRequestDto;
 import com.server.grad.dto.comments.CommentsUpdateRequestDto;
@@ -28,14 +29,14 @@ public class CommentsService {
                 .orElseThrow(()-> new IllegalArgumentException("미션이 존재하지 않아 댓글을 작성할 수 없습니다." + m_id));
 
         User user = userRepository.findById(u_id)
-                .orElseThrow(()-> new IllegalArgumentException("유저가 존재하지 않아 대답할 수 없습니다." + u_id));
+                .orElseThrow(()-> new IllegalArgumentException("유저가 존재하지 않아 댓글을 작성할 수 없습니다." + u_id));
 
         requestDto.setMission_id(mission);
         requestDto.setUser_id(user);
 
         return new CommentsResponseDto(commentsRepository.save(requestDto.toEntity()));
     }
-    public List<CommentsResponseDto> findUsersIdAnswer(Long m_id, Long u_id){
+    public List<CommentsResponseDto> findUsersIdComment(Long m_id, Long u_id){
 
         User entity = userRepository.findById(u_id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 유저 정보가 없습니다." + u_id));
@@ -57,5 +58,16 @@ public class CommentsService {
         comments.update(requestDto.getComment(), requestDto.getDate());
 
         return comments.getId();
+    }
+
+    @Transactional
+    public CommentsResponseDto updateEmoji(Long m_id, CommentsEmojiUpdateReqDto requestDto){
+        User user = userRepository.findByName(requestDto.getUser_name())
+                .orElseThrow(() -> new IllegalArgumentException("해당 유저 정보가 없습니다."));
+
+        Comments comments = commentsRepository.findCommentsByWriterEntity(m_id, user.getId());
+        comments.updateEmoji(requestDto.getEmoji());
+
+        return new CommentsResponseDto(comments);
     }
 }

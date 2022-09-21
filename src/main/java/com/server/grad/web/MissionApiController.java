@@ -1,7 +1,7 @@
 package com.server.grad.web;
 
-import com.server.grad.domain.Mission;
 import com.server.grad.dto.comments.CommentsResponseDto;
+import com.server.grad.service.CommentsService;
 import com.server.grad.service.MissionService;
 import com.server.grad.dto.mission.MissionResponseDto;
 import com.server.grad.service.S3Service;
@@ -9,8 +9,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,6 +24,8 @@ import java.util.Map;
 public class MissionApiController {
 
     private final MissionService missionService;
+
+    private final CommentsService commentsService;
     private final S3Service s3Service;
 
     @PostMapping(value = "/mission", consumes = {"multipart/form-data"})
@@ -51,7 +51,7 @@ public class MissionApiController {
     }
 
     @GetMapping("/missions")
-    @ApiOperation(value = "모든 미션 반환")
+    @ApiOperation(value = "완료된 모든 미션 반환")
     public List<MissionResponseDto> getAll(){
         return missionService.getAll();
     }
@@ -70,11 +70,10 @@ public class MissionApiController {
         return missionService.findById(id);
     }
 
-    @GetMapping("/mission/comments/{id}")
-    @ApiOperation(value = "모든 댓글 반환", notes = "미션 id에 맞는 모든 댓글 반환")
-    public List<CommentsResponseDto> read(@PathVariable Long id){
-        MissionResponseDto dto = missionService.findById(id);
-        return dto.getComments();
+    @GetMapping("/mission/comments/{m_id}/{u_id}")
+    @ApiOperation(value = "미션에 대한 모든 댓글 반환", notes = "미션 id에 맞는 모든 댓글 반환")
+    public List<CommentsResponseDto> read(@PathVariable Long m_id, @PathVariable Long u_id){
+        return commentsService.findUsersIdComment(m_id, u_id);
     }
 
 }

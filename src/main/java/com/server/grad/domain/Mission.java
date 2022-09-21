@@ -68,4 +68,5 @@ public class Mission {
         this.success = success;
         this.comments = comments;
     }
+
 }

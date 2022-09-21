@@ -24,12 +24,11 @@ public class MissionResponseDto {
     private LocalDate date;
     private int similarity;
     private Boolean success;
-    private List<CommentsResponseDto> comments;
 
-    public MissionResponseDto(Mission entity){
+    public MissionResponseDto(Mission entity) {
         this.id = entity.getId();
         this.mission = "https://" + S3Service.CLOUD_FRONT_DOMAIN_NAME + "/" + entity.getMissions().getFilePath();
-        if(entity.getImages()==null){
+        if (entity.getImages() == null) {
             this.image = "none";
         } else {
             this.image = "https://" + S3Service.CLOUD_FRONT_DOMAIN_NAME + "/" + entity.getImages().getFilePath();
@@ -37,6 +36,5 @@ public class MissionResponseDto {
         this.date = entity.getDate();
         this.similarity = entity.getSimilarity();
         this.success = entity.getSuccess();
-        this.comments = entity.getComments().stream().map(CommentsResponseDto::new).collect(Collectors.toList());
     }
 }
