@@ -1,15 +1,15 @@
 package com.server.grad.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Comments {
 
