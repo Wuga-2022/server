@@ -1,5 +1,6 @@
 package com.server.grad.web;
 
+import com.server.grad.dto.comments.CommentsEmojiUpdateReqDto;
 import com.server.grad.dto.comments.CommentsResponseDto;
 import com.server.grad.dto.comments.CommentsSaveRequestDto;
 import com.server.grad.dto.comments.CommentsUpdateRequestDto;
@@ -20,9 +21,9 @@ public class CommentsApiController {
     private final CommentsService commentsService;
 
     @PostMapping("/comment/{m_id}/{u_id}")
-    @ApiOperation(value = "댓글 등록 --> Notion 확인", notes = "미션 id에 따른 댓글 등록")
-    public CommentsResponseDto saveComment(@PathVariable Long m_id,@PathVariable Long u_id, @RequestBody CommentsSaveRequestDto requestDto){
-        CommentsResponseDto result = commentsService.save(m_id,u_id,requestDto);
+    @ApiOperation(value = "댓글 등록", notes = "미션 id에 따른 댓글 등록")
+    public CommentsResponseDto saveComment(@PathVariable Long m_id, @PathVariable Long u_id, @RequestBody CommentsSaveRequestDto requestDto){
+        CommentsResponseDto result = commentsService.save(m_id, u_id, requestDto);
         return result;
     }
 
@@ -33,8 +34,15 @@ public class CommentsApiController {
     }
 
     @PutMapping("comment/{m_id}/{u_id}")
-    @ApiOperation(value = "댓글 수정  --> Notion 확인", notes = "미션 id에 맞는 유저의 댓글 수정")
+    @ApiOperation(value = "댓글 수정", notes = "미션 id에 맞는 유저의 댓글 수정")
     public Long update(@PathVariable Long m_id, @PathVariable Long u_id, @RequestBody CommentsUpdateRequestDto requestDto){
         return commentsService.update(m_id, u_id, requestDto);
     }
+
+    @PutMapping("/answer/emoji/{m_id}")
+    @ApiOperation(value = "답변에 대한 이모지 수정", notes = "질문 id에 맞는 유저의 답변의 이모지 수정")
+    public CommentsResponseDto updateEmoji(@PathVariable Long m_id, @RequestBody CommentsEmojiUpdateReqDto requestDto){
+        return commentsService.updateEmoji(m_id, requestDto);
+    }
+
 }

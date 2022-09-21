@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -23,25 +22,26 @@ public class MissionService {
 
     private final ImageRepository imageRepository;
 
-    public MissionResponseDto upload(Map<Object, String> missionInfo, List<String> files) {
-        String mission = missionInfo.get("mission");
+    private final MissionsRepository missionsRepository;
+
+    public MissionResponseDto create(Map<Object, String> missionInfo, List<String> files) {
         LocalDate date = LocalDate.parse(missionInfo.get("date"));
         int similarity = Integer.parseInt(missionInfo.get("similarity"));
         Boolean success = Boolean.parseBoolean(missionInfo.get("success"));
         List<Comments> comments = null;
-        Mission mission1 = Mission.createMission(mission, date, similarity, success, comments);
+        Mission mission1 = Mission.createMission(date, similarity, success, comments);
 
         if (!files.isEmpty()) {
-            List<Images> images = new ArrayList<>();
+            List<Missions> images = new ArrayList<>();
             for (String file : files) {
-                Images imageFile = Images.builder()
+                Missions imageFile = Missions.builder()
                         .mission(mission1)
                         .filePath(file)
                         .build();
-                imageRepository.save(imageFile);
+                missionsRepository.save(imageFile);
                 images.add(imageFile);
             }
-            mission1.setImages(images);
+            mission1.setMissions(images.get(0));
         }
 
         missionRepository.save(mission1);
@@ -49,18 +49,55 @@ public class MissionService {
         MissionResponseDto singlemission = MissionResponseDto.builder()
                 .id(mission1.getId())
                 .date(mission1.getDate())
-                .mission(mission1.getMission())
                 .similarity(mission1.getSimilarity())
                 .success(mission1.getSuccess())
-                //.comments(mission1.getComments().stream().map(CommentsResponseDto::new).collect(Collectors.toList()))
                 .build();
 
-        List<Images> images = mission1.getImages();
+        Missions img = mission1.getMissions();
         List<String> imageurls = new ArrayList<>();
-        for (Images img : images) {
-            imageurls.add("https://" + S3Service.CLOUD_FRONT_DOMAIN_NAME + "/" + img.getFilePath());
+        imageurls.add("https://" + S3Service.CLOUD_FRONT_DOMAIN_NAME + "/" + img.getFilePath());
+        singlemission.setMission(imageurls.get(0));
+
+        return singlemission;
+    }
+
+    public MissionResponseDto upload(Long id, Map<Object, String> missionInfo, List<String> files) {
+        Mission mission = missionRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 미션 없음"));
+
+        LocalDate date = LocalDate.parse(missionInfo.get("date"));
+        int similarity = Integer.parseInt(missionInfo.get("similarity"));
+        Boolean success = Boolean.parseBoolean(missionInfo.get("success"));
+        List<Comments> comments = null;
+
+        mission.update(date, similarity, success, comments);
+
+        if (!files.isEmpty()) {
+            List<Images> images = new ArrayList<>();
+            for (String file : files) {
+                Images imageFile = Images.builder()
+                        .mission(mission)
+                        .filePath(file)
+                        .build();
+                imageRepository.save(imageFile);
+                images.add(imageFile);
+            }
+            mission.setImages(images.get(0));
         }
-        singlemission.setImages(imageurls);
+
+        missionRepository.save(mission);
+
+        MissionResponseDto singlemission = MissionResponseDto.builder()
+                .id(mission.getId())
+                .date(mission.getDate())
+                .similarity(mission.getSimilarity())
+                .success(mission.getSuccess())
+                .build();
+
+        Images img = mission.getImages();
+        List<String> imageurls = new ArrayList<>();
+        imageurls.add("https://" + S3Service.CLOUD_FRONT_DOMAIN_NAME + "/" + img.getFilePath());
+        singlemission.setImage(imageurls.get(0));
 
         return singlemission;
     }
@@ -68,16 +105,29 @@ public class MissionService {
     public void deleteMission(Long id) {
         Mission mission = missionRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 미션 없음"));
-        List<Images> images = mission.getImages();
-        for (Images image : images) {
-            s3Service.deleteFile(image.getFilePath());
-        }
+        Images images = mission.getImages();
+        s3Service.deleteFile(images.getFilePath());
         missionRepository.delete(mission);
     }
 
     @Transactional
-    public List<Mission> getAll(){
-        return missionRepository.findAll();
+    public List<MissionResponseDto> getAll(){
+        List<Mission> am = missionRepository.findAll();
+        List<MissionResponseDto> mr = new ArrayList<>();
+        for (Mission mission : am){
+            if(mission.getImages()!=null){
+                MissionResponseDto dto = MissionResponseDto.builder()
+                        .id(mission.getId())
+                        .mission("https://" + S3Service.CLOUD_FRONT_DOMAIN_NAME + "/" + mission.getMissions().getFilePath())
+                        .image("https://" + S3Service.CLOUD_FRONT_DOMAIN_NAME + "/" + mission.getImages().getFilePath())
+                        .date(mission.getDate())
+                        .similarity(mission.getSimilarity())
+                        .success(mission.getSuccess())
+                        .build();
+                mr.add(dto);
+            }
+        }
+        return mr;
     }
 
     public MissionResponseDto findById(Long id) {
@@ -85,6 +135,7 @@ public class MissionService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 미션 없음(생성 필요)"));
 
         return new MissionResponseDto(entity);
+
     }
 
 }

@@ -5,15 +5,16 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Entity(name = "Images")
+@Entity(name = "MissionImages")
 @Getter @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Images {
+public class Missions {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "image_id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "missionImage_id")
     private Long id;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
