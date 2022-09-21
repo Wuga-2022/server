@@ -9,7 +9,6 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 public class Comments {
 
@@ -18,7 +17,7 @@ public class Comments {
     private Long id;
 
     @Column
-    private  String emoji = "0,0,0";
+    private String emoji = "0,0,0";
 
     @Column
     private String comment;
