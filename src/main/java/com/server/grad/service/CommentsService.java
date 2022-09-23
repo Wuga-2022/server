@@ -13,6 +13,7 @@ import com.server.grad.domain.MissionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,11 +32,17 @@ public class CommentsService {
         User user = userRepository.findById(u_id)
                 .orElseThrow(()-> new IllegalArgumentException("유저가 존재하지 않아 댓글을 작성할 수 없습니다." + u_id));
 
-        requestDto.setMission_id(mission);
-        requestDto.setUser_id(user);
+        Comments comments = Comments.builder()
+                .comment(requestDto.getComment())
+                .emoji(requestDto.getEmoji())
+                .user_id(user)
+                .date(LocalDate.now())
+                .mission_id(mission)
+                .build();
 
-        return new CommentsResponseDto(commentsRepository.save(requestDto.toEntity()));
+        return new CommentsResponseDto(commentsRepository.save(comments));
     }
+
     public List<CommentsResponseDto> findUsersIdComment(Long m_id, Long u_id){
 
         User entity = userRepository.findById(u_id)

@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.repository.query.Param;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -23,10 +24,10 @@ public class QuestionApiController {
     private final QuestionService questionService;
     private final AnswersService answersService;
 
-    @GetMapping("/question")
+    @GetMapping("/question/{date}")
     @ApiOperation(value = "질문 반환", notes = "질문 날짜에 맞게 반환")
-    public QuestionResponseDto findByDate(@RequestParam LocalDate today_date){
-        return questionService.findByDate(today_date);
+    public QuestionResponseDto findByDate(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date){
+        return questionService.findByDate(date);
     }
 
 //    세션 유저 사용하는 경우(user_id 받지 X)

@@ -1,7 +1,8 @@
 package com.server.grad.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.sun.org.apache.xpath.internal.operations.Bool;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,7 @@ public class Question {
     private String question;
 
     @Column
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate date;
 
     @Column
@@ -34,7 +36,7 @@ public class Question {
 
     // answer join
     @JsonIgnoreProperties({"question_id"})
-    @OneToMany(mappedBy = "question_id", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "question_id", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Answers> answers = new ArrayList<>();
 
     @Builder

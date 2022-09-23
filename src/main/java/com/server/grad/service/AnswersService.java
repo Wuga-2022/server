@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,10 +30,15 @@ public class AnswersService {
         User user = userRepository.findById(u_id)
                 .orElseThrow(()-> new IllegalArgumentException("유저가 존재하지 않아 대답할 수 없습니다." + u_id));
 
-        requestDto.setQuestion_id(question);
-        requestDto.setUser_id(user);
+        Answers answers = Answers.builder()
+                .emoji(requestDto.getEmoji())
+                .answer(requestDto.getAnswer())
+                .question_id(question)
+                .user_id(user)
+                .date(LocalDate.now())
+                .build();
 
-        return new AnswersResponseDto(answersRepository.save(requestDto.toEntity()));
+        return new AnswersResponseDto(answersRepository.save(answers));
     }
 
     public List<AnswersResponseDto> findUsersIdAnswer(Long q_id, Long u_id){

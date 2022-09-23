@@ -23,11 +23,10 @@ public class AnswersApiController {
 
     private final AnswersService answersService;
 
-    @PostMapping("/answer/{q_id}/{u_id}")
+    @PostMapping(value = "/answer/{q_id}/{u_id}")
     @ApiOperation(value = "답변 등록 --> Notion 확인", notes = "질문 id에 따른 답변 등록")
     public AnswersResponseDto saveAnswer(@PathVariable Long q_id,@PathVariable Long u_id, @RequestBody AnswersSaveRequestDto requestDto){
-        AnswersResponseDto result = answersService.save(q_id,u_id,requestDto);
-        return result;
+        return answersService.save(q_id,u_id,requestDto);
     }
 
     @GetMapping("answer/{q_id}/{u_id}")
