@@ -28,7 +28,7 @@ public class Family {
 
     // 1 : N user join
     @JsonIgnoreProperties({"family_id"})
-    @OneToMany(mappedBy = "family_id", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "family_id", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<User> users = new ArrayList<>();
 
     @Builder

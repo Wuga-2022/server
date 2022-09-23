@@ -8,11 +8,11 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.repository.query.Param;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Api(value="Question Controller", tags = "")
@@ -24,10 +24,10 @@ public class QuestionApiController {
     private final QuestionService questionService;
     private final AnswersService answersService;
 
-    @GetMapping("/question")
-    @ApiOperation(value = "질문 반환", notes = "질문 id에 맞게 반환")
-    public QuestionResponseDto findByDate(){
-        return questionService.findByDate();
+    @GetMapping("/question/{date}")
+    @ApiOperation(value = "질문 반환", notes = "질문 날짜에 맞게 반환")
+    public QuestionResponseDto findByDate(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date){
+        return questionService.findByDate(date);
     }
 
 //    세션 유저 사용하는 경우(user_id 받지 X)
@@ -46,7 +46,7 @@ public class QuestionApiController {
     }
 
     @PutMapping("/question/complete/{q_id}")
-    public void update(@PathVariable Long q_id){
-
+    public Long update(@PathVariable Long q_id){
+        return questionService.updateCompletion(q_id);
     }
 }

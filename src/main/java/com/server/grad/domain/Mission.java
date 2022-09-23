@@ -2,6 +2,7 @@ package com.server.grad.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
@@ -41,7 +42,7 @@ public class Mission {
     private Boolean success;
 
     @JsonIgnoreProperties({"mission_id"})
-    @OneToMany(mappedBy = "mission_id", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "mission_id", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Comments> comments = new ArrayList<>();
 
     @Builder

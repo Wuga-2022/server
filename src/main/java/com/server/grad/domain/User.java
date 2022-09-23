@@ -19,6 +19,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name = "user", schema = "public")
+@JsonIgnoreProperties("Answers")
 public class User {
 
     @Id
@@ -53,11 +54,12 @@ public class User {
 
     // 1 : N answer join
     @JsonIgnoreProperties({"user_id"})
-    @OneToMany(mappedBy = "user_id", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user_id", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private Set<Answers> answers = new HashSet<>();
 
     @JsonIgnoreProperties({"user_id"})
-    @OneToMany(mappedBy = "user_id", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user_id", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Comments> comments = new HashSet<>();
 
     @Builder

@@ -1,13 +1,16 @@
 package com.server.grad.service;
 
 import com.server.grad.domain.*;
+import com.server.grad.dto.answers.AnswersEmojiUpdateReqDto;
 import com.server.grad.dto.answers.AnswersResponseDto;
 import com.server.grad.dto.answers.AnswersSaveRequestDto;
 import com.server.grad.dto.answers.AnswersUpdateRequestDto;
+import io.swagger.models.auth.In;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,10 +30,15 @@ public class AnswersService {
         User user = userRepository.findById(u_id)
                 .orElseThrow(()-> new IllegalArgumentException("유저가 존재하지 않아 대답할 수 없습니다." + u_id));
 
-        requestDto.setQuestion_id(question);
-        requestDto.setUser_id(user);
+        Answers answers = Answers.builder()
+                .emoji(requestDto.getEmoji())
+                .answer(requestDto.getAnswer())
+                .question_id(question)
+                .user_id(user)
+                .date(LocalDate.now())
+                .build();
 
-        return new AnswersResponseDto(answersRepository.save(requestDto.toEntity()));
+        return new AnswersResponseDto(answersRepository.save(answers));
     }
 
     public List<AnswersResponseDto> findUsersIdAnswer(Long q_id, Long u_id){
@@ -58,5 +66,16 @@ public class AnswersService {
         answers.update(requestDto.getAnswer(), requestDto.getDate());
 
         return answers.getId();
+    }
+
+    @Transactional
+    public AnswersResponseDto updateEmoji(Long q_id, AnswersEmojiUpdateReqDto requestDto){
+        User user = userRepository.findByName(requestDto.getUser_name())
+                .orElseThrow(() -> new IllegalArgumentException("해당 유저 정보가 없습니다."));
+
+        Answers answers = answersRepository.findAnswersByWriterEntity(q_id, user.getId());
+        answers.updateEmoji(requestDto.getEmoji());
+
+        return new AnswersResponseDto(answers);
     }
 }

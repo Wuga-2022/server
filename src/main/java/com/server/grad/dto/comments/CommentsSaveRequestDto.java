@@ -16,25 +16,17 @@ import java.time.LocalDate;
 public class CommentsSaveRequestDto {
     private String emoji;
     private String comment;
-    private LocalDate date = LocalDate.now();
-    private Mission mission_id;
-    private User user_id;
 
     @Builder
-    public CommentsSaveRequestDto(String emoji, String comment, Mission mission_id, User user_id){
+    public CommentsSaveRequestDto(String emoji, String comment){
         this.emoji = emoji;
         this.comment = comment;
-        this.mission_id = mission_id;
-        this.user_id = user_id;
     }
 
     public Comments toEntity(){
         Comments comments = Comments.builder()
                 .emoji(emoji)
                 .comment(comment)
-                .date(date)
-                .mission_id(mission_id)
-                .user_id(user_id)
                 .build();
 
         return comments;
