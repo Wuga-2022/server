@@ -1,9 +1,6 @@
 package com.server.grad.dto.answers;
 
-import com.server.grad.domain.Answers;
-import com.server.grad.domain.Question;
-import com.server.grad.domain.User;
-import lombok.Builder;
+import com.server.grad.domain.answers.Answers;
 import lombok.Getter;
 
 import java.time.LocalDate;

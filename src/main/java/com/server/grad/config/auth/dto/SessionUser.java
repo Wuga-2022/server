@@ -1,6 +1,6 @@
 package com.server.grad.config.auth.dto;
 
-import com.server.grad.domain.User;
+import com.server.grad.domain.user.User;
 import lombok.Getter;
 
 import java.io.Serializable;

@@ -1,15 +1,12 @@
 package com.server.grad.dto.mission;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.server.grad.domain.Mission;
-import com.server.grad.dto.comments.CommentsResponseDto;
+import com.server.grad.domain.mission.Mission;
 import com.server.grad.service.S3Service;
 import lombok.*;
 
 import lombok.Getter;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 @Builder

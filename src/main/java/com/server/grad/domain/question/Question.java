@@ -1,8 +1,8 @@
-package com.server.grad.domain;
+package com.server.grad.domain.question;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.server.grad.domain.answers.Answers;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

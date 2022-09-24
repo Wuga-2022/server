@@ -1,4 +1,4 @@
-package com.server.grad.domain;
+package com.server.grad.domain.mission;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

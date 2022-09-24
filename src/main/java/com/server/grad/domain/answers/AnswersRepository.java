@@ -1,4 +1,4 @@
-package com.server.grad.domain;
+package com.server.grad.domain.answers;
 
 import com.server.grad.dto.answers.AnswersResponseDto;
 import org.springframework.data.jpa.repository.JpaRepository;

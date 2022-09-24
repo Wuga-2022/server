@@ -1,11 +1,15 @@
 package com.server.grad.service;
 
-import com.server.grad.domain.*;
+import com.server.grad.domain.answers.Answers;
+import com.server.grad.domain.answers.AnswersRepository;
+import com.server.grad.domain.question.Question;
+import com.server.grad.domain.question.QuestionRepository;
+import com.server.grad.domain.user.User;
+import com.server.grad.domain.user.UserRepository;
 import com.server.grad.dto.answers.AnswersEmojiUpdateReqDto;
 import com.server.grad.dto.answers.AnswersResponseDto;
 import com.server.grad.dto.answers.AnswersSaveRequestDto;
 import com.server.grad.dto.answers.AnswersUpdateRequestDto;
-import io.swagger.models.auth.In;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,10 +46,6 @@ public class AnswersService {
     }
 
     public List<AnswersResponseDto> findUsersIdAnswer(Long q_id, Long u_id){
-        //userId --> User.getFamily --> Family.getUsers  ==> Users List  -(stream)-> id
-        //user_id = users.stream().map(e -> e.getId()).collect(Collectors.toList());
-        //Answer  SQL In 절  select * from Answer a where a.q_id = 'q_id' and a.u_id IN 'users_id';
-
         User entity = userRepository.findById(u_id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 유저 정보가 없습니다." + u_id));
 

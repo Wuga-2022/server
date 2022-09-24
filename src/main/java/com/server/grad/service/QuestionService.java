@@ -1,7 +1,7 @@
 package com.server.grad.service;
 
-import com.server.grad.domain.Question;
-import com.server.grad.domain.QuestionRepository;
+import com.server.grad.domain.question.Question;
+import com.server.grad.domain.question.QuestionRepository;
 import com.server.grad.dto.question.QuestionResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

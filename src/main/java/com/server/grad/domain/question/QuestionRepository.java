@@ -1,7 +1,6 @@
-package com.server.grad.domain;
+package com.server.grad.domain.question;
 
 import com.server.grad.dto.answers.AnswersResponseDto;
-import com.server.grad.dto.question.QuestionResponseDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

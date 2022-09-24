@@ -1,7 +1,7 @@
 package com.server.grad.config.auth.dto;
 
-import com.server.grad.domain.Role;
-import com.server.grad.domain.User;
+import com.server.grad.domain.user.Role;
+import com.server.grad.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 

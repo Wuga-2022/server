@@ -1,6 +1,6 @@
 package com.server.grad.dto.user;
 
-import com.server.grad.domain.Family;
+import com.server.grad.domain.family.Family;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

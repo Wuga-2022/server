@@ -1,16 +1,10 @@
 package com.server.grad.dto.answers;
 
-import com.server.grad.domain.Answers;
-import com.server.grad.domain.Question;
-import com.server.grad.domain.User;
+import com.server.grad.domain.answers.Answers;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.apache.tomcat.jni.Local;
-
-import java.time.LocalDate;
-import java.time.ZoneId;
 
 @Getter
 @Setter

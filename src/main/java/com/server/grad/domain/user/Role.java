@@ -1,4 +1,4 @@
-package com.server.grad.domain;
+package com.server.grad.domain.user;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

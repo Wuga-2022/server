@@ -22,18 +22,6 @@ public class FamilyApiController {
 
     private final FamilyService familyService;
 
-//    @GetMapping("/familycode/")
-//    @ApiOperation(value = "가족 코드 생성", notes = "코드 생성한 유저의 가족 결정됨")
-//    public String getFamilyCode(@LoginUser SessionUser user){
-//        return familyService.createCode(user.getEmail());
-//    }
-//
-//    @PostMapping("/familycode")
-//    @ApiOperation(value = "가족 코드 입력", notes = "코드 입력한 유저의 가족 결정됨")
-//    public Long putFamilyCode(@LoginUser SessionUser user, @RequestParam String familycode) {
-//        return familyService.updateUserFamCode(user.getEmail(), familycode);
-//    }
-
     @GetMapping("/familycode/{u_id}")
     @ApiOperation(value = "가족 코드 생성", notes = "코드 생성한 유저의 가족 결정됨")
     public String getFamilyCode(@PathVariable Long u_id){

@@ -1,7 +1,7 @@
 package com.server.grad.service;
 
-import com.server.grad.domain.User;
-import com.server.grad.domain.UserRepository;
+import com.server.grad.domain.user.User;
+import com.server.grad.domain.user.UserRepository;
 import com.server.grad.dto.user.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -38,7 +38,6 @@ public class UserService {
        return null;
    }
 
-    //Session User 때문에 email -> u_id 변경함
    @Transactional
    public Long updateFamily(Long u_id, UserUpdateFamilyDto requestDto){
        User user = userRepository.findById(u_id)
