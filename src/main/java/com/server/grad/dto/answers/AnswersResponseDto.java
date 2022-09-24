@@ -15,6 +15,7 @@ public class AnswersResponseDto {
     private String answer;
     private LocalDate date;
     private String user_name;
+    private String user_profile;
 
     public AnswersResponseDto(Answers entity){
         this.id = entity.getId();
@@ -22,5 +23,6 @@ public class AnswersResponseDto {
         this.answer = entity.getAnswer();
         this.date = entity.getDate();
         this.user_name = entity.getUser_id().getName();
+        this.user_profile = entity.getUser_id().getProfile_img();
     }
 }
