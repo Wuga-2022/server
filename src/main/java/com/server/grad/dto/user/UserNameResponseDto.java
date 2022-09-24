@@ -1,7 +1,6 @@
 package com.server.grad.dto.user;
 
-import com.server.grad.domain.Family;
-import com.server.grad.domain.User;
+import com.server.grad.domain.user.User;
 import lombok.Getter;
 
 @Getter

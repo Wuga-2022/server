@@ -1,6 +1,5 @@
 package com.server.grad.config.auth;
 
-import com.server.grad.domain.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;

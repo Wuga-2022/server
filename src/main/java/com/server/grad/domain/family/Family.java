@@ -1,16 +1,14 @@
-package com.server.grad.domain;
+package com.server.grad.domain.family;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.server.grad.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import java.util.stream.Collectors;
 
 @Getter
 @NoArgsConstructor

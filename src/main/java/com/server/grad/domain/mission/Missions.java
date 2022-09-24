@@ -1,4 +1,4 @@
-package com.server.grad.domain;
+package com.server.grad.domain.mission;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;

@@ -30,18 +30,6 @@ public class UserApiController {
         return userService.login(email, password);
     }
 
-//    @PutMapping("/user")
-//    @ApiOperation(value = "유저 정보 수정", notes = "")
-//    public Long update(@LoginUser SessionUser user, @RequestBody UserUpdateRequestDto requestDto) {
-//        return userService.update(user.getEmail(), requestDto);
-//    }
-//
-//    @GetMapping("/user")
-//    @ApiOperation(value = "유저 정보 반환", notes = "")
-//    public UserResponseDto findById(@LoginUser SessionUser user) {
-//        return userService.findById(user.getId());
-//    }
-
     @PutMapping("/user/{u_id}")
     @ApiOperation(value = "유저 정보 수정", notes = "")
     public Long update(@PathVariable Long u_id, @RequestBody UserUpdateRequestDto requestDto) {

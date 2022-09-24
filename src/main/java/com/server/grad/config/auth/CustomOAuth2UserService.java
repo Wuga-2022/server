@@ -3,8 +3,8 @@ package com.server.grad.config.auth;
 
 import com.server.grad.config.auth.dto.OAuthAttributes;
 import com.server.grad.config.auth.dto.SessionUser;
-import com.server.grad.domain.User;
-import com.server.grad.domain.UserRepository;
+import com.server.grad.domain.user.User;
+import com.server.grad.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;

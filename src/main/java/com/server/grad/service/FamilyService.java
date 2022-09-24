@@ -1,13 +1,12 @@
 package com.server.grad.service;
 
-import com.server.grad.domain.FamilyRepository;
+import com.server.grad.domain.family.FamilyRepository;
 
-import com.server.grad.domain.User;
-import com.server.grad.domain.UserRepository;
+import com.server.grad.domain.user.User;
+import com.server.grad.domain.user.UserRepository;
 
 import com.server.grad.dto.family.FamilySaveRequestDto;
 import com.server.grad.dto.user.UserNameResponseDto;
-import com.server.grad.dto.user.UserResponseDto;
 import com.server.grad.dto.user.UserUpdateFamilyDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +28,6 @@ public class FamilyService {
     @Autowired
     ModelMapper modelMapper;
 
-    //Session User 때문에 email -> u_id 변경함
     @Transactional
     public Long updateUserFamCode(Long u_id, String familycode){
         UserUpdateFamilyDto updateFamilyDto = new UserUpdateFamilyDto(familyRepository.findByFamilycode(familycode)
@@ -39,7 +37,6 @@ public class FamilyService {
         return userService.updateFamily(u_id, updateFamilyDto);
     }
 
-    //Session User 때문에 email -> u_id 변경함
     @Transactional
     public String createCode(Long u_id) {
         Random random = new Random();
@@ -53,7 +50,6 @@ public class FamilyService {
 
         } while(familyRepository.findByFamilycode(generatedString).isPresent());
 
-        // user db에 family id 넣기
         FamilySaveRequestDto requestDto = new FamilySaveRequestDto(generatedString);
 
         User user = userRepository.findById(u_id)

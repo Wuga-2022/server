@@ -1,6 +1,6 @@
 package com.server.grad.dto.comments;
 
-import com.server.grad.domain.Comments;
+import com.server.grad.domain.comments.Comments;
 import lombok.Getter;
 
 import java.time.LocalDate;

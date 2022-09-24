@@ -1,6 +1,7 @@
-package com.server.grad.domain;
+package com.server.grad.domain.comments;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.server.grad.domain.mission.Mission;
+import com.server.grad.domain.user.User;
 import lombok.*;
 
 import javax.persistence.*;

@@ -1,8 +1,8 @@
-package com.server.grad.domain;
+package com.server.grad.domain.mission;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.server.grad.domain.comments.Comments;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 

@@ -1,14 +1,16 @@
 package com.server.grad.service;
 
-import com.server.grad.domain.*;
+import com.server.grad.domain.comments.Comments;
+import com.server.grad.domain.user.User;
+import com.server.grad.domain.user.UserRepository;
 import com.server.grad.dto.comments.CommentsEmojiUpdateReqDto;
 import com.server.grad.dto.comments.CommentsResponseDto;
 import com.server.grad.dto.comments.CommentsSaveRequestDto;
 import com.server.grad.dto.comments.CommentsUpdateRequestDto;
 
-import com.server.grad.domain.CommentsRepository;
-import com.server.grad.domain.Mission;
-import com.server.grad.domain.MissionRepository;
+import com.server.grad.domain.comments.CommentsRepository;
+import com.server.grad.domain.mission.Mission;
+import com.server.grad.domain.mission.MissionRepository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

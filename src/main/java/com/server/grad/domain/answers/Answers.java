@@ -1,18 +1,13 @@
-package com.server.grad.domain;
+package com.server.grad.domain.answers;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.server.grad.domain.question.Question;
+import com.server.grad.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.apache.tomcat.jni.Local;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.mapping.Join;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 
 @Getter
 @NoArgsConstructor

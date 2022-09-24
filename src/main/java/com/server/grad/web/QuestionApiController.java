@@ -30,18 +30,9 @@ public class QuestionApiController {
         return questionService.findByDate(date);
     }
 
-//    세션 유저 사용하는 경우(user_id 받지 X)
-//    @GetMapping("/question/answers/{q_id}")
-//    @ApiOperation(value = "모든 답변 반환", notes = "질문 id에 맞는 모든 답변 반환")
-//    public List<AnswersResponseDto> read(@PathVariable Long q_id, @LoginUser SessionUser user){
-//
-//        return answersService.findUsersIdAnswer(q_id, user.getId());
-//    }
-
     @GetMapping("/question/answers/{q_id}/{u_id}")
     @ApiOperation(value = "모든 답변 반환", notes = "질문 id에 맞는 모든 답변 반환")
     public List<AnswersResponseDto> read(@PathVariable Long q_id, @PathVariable Long u_id){
-
         return answersService.findUsersIdAnswer(q_id, u_id);
     }
 

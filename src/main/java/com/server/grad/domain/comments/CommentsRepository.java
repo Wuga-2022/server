@@ -1,4 +1,4 @@
-package com.server.grad.domain;
+package com.server.grad.domain.comments;
 
 import com.server.grad.dto.comments.CommentsResponseDto;
 import org.springframework.data.jpa.repository.JpaRepository;

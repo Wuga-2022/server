@@ -1,14 +1,9 @@
 package com.server.grad.dto.question;
 
-import com.server.grad.domain.Question;
-import com.server.grad.dto.answers.AnswersResponseDto;
-import lombok.Builder;
+import com.server.grad.domain.question.Question;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 public class QuestionResponseDto {

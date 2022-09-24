@@ -1,4 +1,4 @@
-package com.server.grad.domain;
+package com.server.grad.domain.family;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

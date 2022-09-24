@@ -1,14 +1,10 @@
 package com.server.grad.dto.comments;
 
-import com.server.grad.domain.Comments;
-import com.server.grad.domain.Mission;
-import com.server.grad.domain.User;
+import com.server.grad.domain.comments.Comments;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.time.LocalDate;
 
 @Getter
 @Setter
