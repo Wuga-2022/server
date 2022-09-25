@@ -10,19 +10,22 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class AnswersSaveRequestDto {
-    private String emoji;
     private String answer;
+    private int emj_good = 0;
+    private int emj_heart = 0;
+    private int emj_smile = 0;
 
     @Builder
-    public AnswersSaveRequestDto(String emoji, String answer){
-        this.emoji = emoji;
+    public AnswersSaveRequestDto(String answer){
         this.answer = answer;
     }
 
     // Dto -> Entity
     public Answers toEntity(){
         Answers answers = Answers.builder()
-                .emoji(emoji)
+                .emj_good(emj_good)
+                .emj_heart(emj_heart)
+                .emj_smile(emj_smile)
                 .answer(answer)
                 .build();
 
