@@ -24,13 +24,12 @@ import java.util.Map;
 public class MissionApiController {
 
     private final MissionService missionService;
-
     private final CommentsService commentsService;
     private final S3Service s3Service;
 
-    @PostMapping(value = "/mission", consumes = {"multipart/form-data"})
+    @PostMapping(value = "/mission", consumes = "multipart/form-data")
     @ApiOperation(value = "미션 등록")
-    public MissionResponseDto createMission(@RequestPart(value="mission") Map<Object, String> mission,
+    public MissionResponseDto createMission(@RequestPart(value = "mission") Map<Object, String> mission,
                                             @RequestPart(value = "mission_images", required = false) List<MultipartFile> images) throws IOException {
         List<String> imageList = new ArrayList<>();
         if (images != null) {
