@@ -35,7 +35,9 @@ public class AnswersService {
                 .orElseThrow(()-> new IllegalArgumentException("유저가 존재하지 않아 대답할 수 없습니다." + u_id));
 
         Answers answers = Answers.builder()
-                .emoji(requestDto.getEmoji())
+                .emj_good(requestDto.getEmj_good())
+                .emj_heart(requestDto.getEmj_heart())
+                .emj_smile(requestDto.getEmj_smile())
                 .answer(requestDto.getAnswer())
                 .question_id(question)
                 .user_id(user)
@@ -69,12 +71,24 @@ public class AnswersService {
     }
 
     @Transactional
-    public AnswersResponseDto updateEmoji(Long q_id, AnswersEmojiUpdateReqDto requestDto){
-        User user = userRepository.findByName(requestDto.getUser_name())
+    public AnswersResponseDto updateEmoji(Long q_id, Long u_id, String emoji, int calc){
+        User user = userRepository.findById(u_id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 유저 정보가 없습니다."));
 
         Answers answers = answersRepository.findAnswersByWriterEntity(q_id, user.getId());
-        answers.updateEmoji(requestDto.getEmoji());
+        int num = calc == 0 ? -1 : 1;
+
+        switch (emoji){
+            case "good":
+                answers.updateEmoji(answers.getEmj_good() + num, answers.getEmj_heart(), answers.getEmj_smile());
+                break;
+            case "heart":
+                answers.updateEmoji(answers.getEmj_good(), answers.getEmj_heart() + num, answers.getEmj_smile());
+                break;
+            case "smile":
+                answers.updateEmoji(answers.getEmj_good(), answers.getEmj_heart(), answers.getEmj_smile() + num);
+                break;
+        }
 
         return new AnswersResponseDto(answers);
     }

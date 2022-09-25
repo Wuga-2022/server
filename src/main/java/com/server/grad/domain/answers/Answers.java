@@ -19,7 +19,13 @@ public class Answers {
     private Long id;
 
     @Column
-    private String emoji = "0,0,0";
+    private int emj_good = 0;
+
+    @Column
+    private int emj_heart = 0;
+
+    @Column
+    private int emj_smile = 0;
 
     @Column
     private String answer;
@@ -38,8 +44,10 @@ public class Answers {
     private User user_id;
 
     @Builder
-    public Answers(String emoji, String answer, LocalDate date, Question question_id, User user_id){
-        this.emoji = emoji;
+    public Answers(int emj_good, int emj_heart, int emj_smile, String answer, LocalDate date, Question question_id, User user_id){
+        this.emj_good = emj_good;
+        this.emj_heart = emj_heart;
+        this.emj_smile = emj_smile;
         this.answer = answer;
         this.date = date;
         this.question_id = question_id;
@@ -51,7 +59,9 @@ public class Answers {
         this.date = date;
     }
 
-    public String updateEmoji(String emoji){
-        return this.emoji = emoji;
+    public void updateEmoji(int emj_good, int emj_heart, int emj_smile){
+        this.emj_good = emj_good;
+        this.emj_heart = emj_heart;
+        this.emj_smile = emj_smile;
     }
 }

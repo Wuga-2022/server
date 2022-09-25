@@ -36,7 +36,9 @@ public class CommentsService {
 
         Comments comments = Comments.builder()
                 .comment(requestDto.getComment())
-                .emoji(requestDto.getEmoji())
+                .emj_good(requestDto.getEmj_good())
+                .emj_heart(requestDto.getEmj_heart())
+                .emj_smile(requestDto.getEmj_smile())
                 .user_id(user)
                 .date(LocalDate.now())
                 .mission_id(mission)
@@ -70,12 +72,24 @@ public class CommentsService {
     }
 
     @Transactional
-    public CommentsResponseDto updateEmoji(Long m_id, CommentsEmojiUpdateReqDto requestDto){
-        User user = userRepository.findByName(requestDto.getUser_name())
+    public CommentsResponseDto updateEmoji(Long m_id, Long u_id, String emoji, int calc){
+        User user = userRepository.findById(u_id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 유저 정보가 없습니다."));
 
         Comments comments = commentsRepository.findCommentsByWriterEntity(m_id, user.getId());
-        comments.updateEmoji(requestDto.getEmoji());
+        int num = calc == 0 ? -1 : 1;
+
+        switch (emoji){
+            case "good":
+                comments.updateEmoji(comments.getEmj_good() + num, comments.getEmj_heart(), comments.getEmj_smile());
+                break;
+            case "heart":
+                comments.updateEmoji(comments.getEmj_good(), comments.getEmj_heart() + num, comments.getEmj_smile());
+                break;
+            case "smile":
+                comments.updateEmoji(comments.getEmj_good(), comments.getEmj_heart(), comments.getEmj_smile() + num);
+                break;
+        }
 
         return new CommentsResponseDto(comments);
     }

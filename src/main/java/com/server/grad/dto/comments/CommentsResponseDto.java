@@ -8,7 +8,9 @@ import java.time.LocalDate;
 @Getter
 public class CommentsResponseDto {
     private Long id;
-    private String emoji;
+    private int emj_good;
+    private int emj_heart;
+    private int emj_smile;
     private String comment;
     private LocalDate date;
     private String user_name;
@@ -16,7 +18,9 @@ public class CommentsResponseDto {
 
     public CommentsResponseDto(Comments entity){
         this.id = entity.getId();
-        this.emoji = entity.getEmoji();
+        this.emj_good = entity.getEmj_good();
+        this.emj_heart = entity.getEmj_heart();
+        this.emj_smile = entity.getEmj_smile();
         this.comment = entity.getComment();
         this.date = entity.getDate();
         this.user_name = entity.getUser_id().getName();

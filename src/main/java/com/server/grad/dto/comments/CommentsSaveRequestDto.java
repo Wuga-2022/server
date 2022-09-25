@@ -10,18 +10,21 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class CommentsSaveRequestDto {
-    private String emoji;
     private String comment;
+    private int emj_good = 0;
+    private int emj_heart = 0;
+    private int emj_smile = 0;
 
     @Builder
-    public CommentsSaveRequestDto(String emoji, String comment){
-        this.emoji = emoji;
+    public CommentsSaveRequestDto(String comment){
         this.comment = comment;
     }
 
     public Comments toEntity(){
         Comments comments = Comments.builder()
-                .emoji(emoji)
+                .emj_good(emj_good)
+                .emj_heart(emj_heart)
+                .emj_smile(emj_smile)
                 .comment(comment)
                 .build();
 
