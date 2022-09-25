@@ -41,9 +41,9 @@ public class AnswersApiController {
         return answersService.update(q_id, u_id, requestDto);
     }
 
-    @PutMapping("/answer/emoji/{q_id}")
+    @PutMapping("/answer/emoji/{q_id}/{u_id}")
     @ApiOperation(value = "답변에 대한 이모지 수정", notes = "질문 id에 맞는 유저의 답변의 이모지 수정")
-    public AnswersResponseDto updateEmoji(@PathVariable Long q_id, @RequestBody AnswersEmojiUpdateReqDto requestDto){
-        return answersService.updateEmoji(q_id, requestDto);
+    public AnswersResponseDto updateEmoji(@PathVariable Long q_id, @PathVariable Long u_id, @RequestParam String emoji, @RequestParam int calc){
+        return answersService.updateEmoji(q_id,u_id, emoji, calc);
     }
 }
