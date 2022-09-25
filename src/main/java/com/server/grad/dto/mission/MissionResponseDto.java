@@ -34,4 +34,6 @@ public class MissionResponseDto {
         this.similarity = entity.getSimilarity();
         this.success = entity.getSuccess();
     }
+
 }
+

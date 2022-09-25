@@ -24,7 +24,6 @@ import java.util.Map;
 public class MissionApiController {
 
     private final MissionService missionService;
-
     private final CommentsService commentsService;
     private final S3Service s3Service;
 
