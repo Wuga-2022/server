@@ -73,10 +73,7 @@ public class CommentsService {
 
     @Transactional
     public CommentsResponseDto updateEmoji(Long m_id, Long u_id, String emoji, int calc){
-        User user = userRepository.findById(u_id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 유저 정보가 없습니다."));
-
-        Comments comments = commentsRepository.findCommentsByWriterEntity(m_id, user.getId());
+        Comments comments = commentsRepository.findCommentsByWriterEntity(m_id, u_id);
         int num = calc == 0 ? -1 : 1;
 
         switch (emoji){

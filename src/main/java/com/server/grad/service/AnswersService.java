@@ -72,10 +72,7 @@ public class AnswersService {
 
     @Transactional
     public AnswersResponseDto updateEmoji(Long q_id, Long u_id, String emoji, int calc){
-        User user = userRepository.findById(u_id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 유저 정보가 없습니다."));
-
-        Answers answers = answersRepository.findAnswersByWriterEntity(q_id, user.getId());
+        Answers answers = answersRepository.findAnswersByWriterEntity(q_id, u_id);
         int num = calc == 0 ? -1 : 1;
 
         switch (emoji){
