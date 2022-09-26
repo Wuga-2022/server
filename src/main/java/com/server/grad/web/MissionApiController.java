@@ -74,5 +74,4 @@ public class MissionApiController {
     public List<CommentsResponseDto> read(@PathVariable Long m_id, @PathVariable Long u_id){
         return commentsService.findUsersIdComment(m_id, u_id);
     }
-
 }
