@@ -63,11 +63,11 @@ public class Mission {
         return mission1;
     }
 
-    public void update(LocalDate date, int similarity, Boolean success, List<Comments> comments){
+    public void update(LocalDate date, int similarity, Boolean success, Images images){
         this.date = date;
         this.similarity = similarity;
         this.success = success;
-        this.comments = comments;
+        this.images = images;
     }
 
 }

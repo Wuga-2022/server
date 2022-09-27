@@ -29,7 +29,7 @@ public class MissionApiController {
 
     @PostMapping(value = "/mission", consumes = {"multipart/form-data"})
     @ApiOperation(value = "미션 등록")
-    public MissionResponseDto createMission(@RequestPart(value="mission") Map<Object, String> mission,
+    public MissionResponseDto createMission(@RequestPart(value="mission", required = false) Map<Object, String> mission,
                                             @RequestPart(value = "mission_images", required = false) List<MultipartFile> images) throws IOException {
         List<String> imageList = new ArrayList<>();
         if (images != null) {
@@ -40,7 +40,7 @@ public class MissionApiController {
 
     @PutMapping(value = "/mission/{id}", consumes = {"multipart/form-data"})
     @ApiOperation(value = "사진 등록")
-    public MissionResponseDto uploadMission(@PathVariable Long id, @RequestPart(value="mission") Map<Object, String> mission,
+    public MissionResponseDto uploadMission(@PathVariable Long id, @RequestPart(value="mission", required = false) Map<Object, String> mission,
                                             @RequestPart(value = "images", required = false) List<MultipartFile> images) throws IOException {
         List<String> imageList = new ArrayList<>();
         if (images != null) {

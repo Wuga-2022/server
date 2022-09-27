@@ -66,39 +66,70 @@ public class MissionService {
         LocalDate date = LocalDate.parse(missionInfo.get("date"));
         int similarity = Integer.parseInt(missionInfo.get("similarity"));
         Boolean success = Boolean.parseBoolean(missionInfo.get("success"));
-        List<Comments> comments = null;
 
-        mission.update(date, similarity, success, comments);
-
-        if (!files.isEmpty()) {
-            List<Images> images = new ArrayList<>();
-            for (String file : files) {
-                Images imageFile = Images.builder()
-                        .mission(mission)
-                        .filePath(file)
-                        .build();
-                imageRepository.save(imageFile);
-                images.add(imageFile);
+        if (mission.getImages() != null) {
+            if (!files.isEmpty()) {
+                List<Images> images = new ArrayList<>();
+                for (String file : files) {
+                    Images imageFile = Images.builder()
+                            .mission(mission)
+                            .filePath(file)
+                            .build();
+                    imageRepository.save(imageFile);
+                    images.add(imageFile);
+                }
+                //mission.setImages(images.get(0));
+                mission.update(date, similarity, success, images.get(0));
             }
-            mission.setImages(images.get(0));
+            missionRepository.save(mission);
+
+            MissionResponseDto singlemission = MissionResponseDto.builder()
+                    .id(mission.getId())
+                    .date(mission.getDate())
+                    .similarity(mission.getSimilarity())
+                    .success(mission.getSuccess())
+                    .build();
+
+
+            Images img = mission.getImages();
+            List<String> imageurls = new ArrayList<>();
+            imageurls.add("https://" + S3Service.CLOUD_FRONT_DOMAIN_NAME + "/" + img.getFilePath());
+            singlemission.setImage(imageurls.get(0));
+
+            return singlemission;
+
+        } else {
+            if (!files.isEmpty()) {
+                List<Images> images = new ArrayList<>();
+                for (String file : files) {
+                    Images imageFile = Images.builder()
+                            .mission(mission)
+                            .filePath(file)
+                            .build();
+                    imageRepository.save(imageFile);
+                    images.add(imageFile);
+                }
+                mission.setImages(images.get(0));
+            }
+
+            missionRepository.save(mission);
+
+            MissionResponseDto singlemission = MissionResponseDto.builder()
+                    .id(mission.getId())
+                    .date(mission.getDate())
+                    .similarity(mission.getSimilarity())
+                    .success(mission.getSuccess())
+                    .build();
+
+            Images img = mission.getImages();
+            List<String> imageurls = new ArrayList<>();
+            imageurls.add("https://" + S3Service.CLOUD_FRONT_DOMAIN_NAME + "/" + img.getFilePath());
+            singlemission.setImage(imageurls.get(0));
+
+            return singlemission;
         }
-
-        missionRepository.save(mission);
-
-        MissionResponseDto singlemission = MissionResponseDto.builder()
-                .id(mission.getId())
-                .date(mission.getDate())
-                .similarity(mission.getSimilarity())
-                .success(mission.getSuccess())
-                .build();
-
-        Images img = mission.getImages();
-        List<String> imageurls = new ArrayList<>();
-        imageurls.add("https://" + S3Service.CLOUD_FRONT_DOMAIN_NAME + "/" + img.getFilePath());
-        singlemission.setImage(imageurls.get(0));
-
-        return singlemission;
     }
+
 
     public void deleteMission(Long id) {
         Mission mission = missionRepository.findById(id)
